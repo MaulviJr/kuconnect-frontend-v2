@@ -1,12 +1,71 @@
-# React + Vite
+# KUConnect
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+KUConnect is a student resource web application for the **University of Karachi**, designed to provide semester-wise academic content, quizzes, forums, and an AI-powered chatbot — all in one place.
 
-Currently, two official plugins are available:
+> **Status:** 🚧 Under Development (MERN Stack)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ✨ Features (Planned)
+- 📂 Semester-wise academic content
+- 📝 Quizzes & practice material
+- 💬 Discussion forums
+- 🤖 AI chatbot for academic help
+- 📱 Responsive UI
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠 Tech Stack
+**Frontend:** React + Vite, TailwindCSS, shadcn/ui  
+**Backend:** Node.js, Express, MongoDB *(coming soon)*  
+**Other:** ESLint, Prettier, GitHub for version control
+
+---
+
+## 📦 Getting Started (Local Setup)
+
+Follow these steps to run `KUConnect` on your local machine:
+
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/alishanawer/kuconnect-frontend.git
+```
+### 2️⃣ Go into the Project Directory
+```bash
+cd kuconnect-frontend
+```
+### 3️⃣ Install Dependencies
+Make sure you have Node.js (v18+) installed. Then run:
+```bash
+npm install
+```
+### 4️⃣ Run the Development Server
+```bash
+npm run dev
+```
+The app should now be running at:
+```bash
+http://localhost:5173
+```
+
+---
+
+## 🤝 Contribution Guidelines
+- 📂 Follow the existing folder structure and naming conventions.
+- ✔️ Write clean, readable, and well-commented code.
+- ❕ Commit messages should be short but descriptive.
+- ♾️ Pull the latest changes from the `main` branch before starting or committing new work.
+- 🔗 Create a branch with your `name`, and work on your assigned features and bug fixes there.
+- 🛑 Test your changes before pushing.
+- 💭 Submit a pull request (PR) for review before merging into main.
+
+---
+
+## 📌 Notes
+- This project is under active development by the KUConnect team.
+- Please follow the contribution guidelines to keep our workflow smooth.
+
+---
+
+## 🙌 Thanks
+Thanks to everyone contributing their time and effort to make KUConnect a reality! 🚀
