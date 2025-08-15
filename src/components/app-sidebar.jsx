@@ -159,8 +159,12 @@ export function AppSidebar({ ...props }) {
             <SidebarMenuButton
               asChild
               className="data-[slot=sidebar-menu-button]:!p-1.5">
-              <a href="#">
-                <IconInnerShadowTop className="!size-5" />
+              <a href="/dashboard">
+                <img
+                  src="/src/assets/favicon.svg"
+                  alt="logo"
+                  className="!size-5"
+                />
                 <span className="text-base font-semibold">KU Connect</span>
               </a>
             </SidebarMenuButton>
