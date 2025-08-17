@@ -3,10 +3,11 @@ import Dashboard from "./pages/dashboard";
 import Home from "./pages/home";
 import LoginPage from "./pages/login";
 import NotFound from "./pages/notFound";
-import GpaCalculatorPage from "./pages/gpaCalculator";
 import ResourcesPage from "./pages/resources";
 import AskSeniorsPage from "./pages/askSeniors";
 import SupportPage from "./pages/support";
+import SemesterView from "./pages/gpa-calculator/semester-view";
+import CourseView from "./pages/gpa-calculator/course-view";
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
         <Route path="/resources" element={<ResourcesPage />} />
         <Route path="/ask-seniors" element={<AskSeniorsPage />} />
         <Route path="/support-groups" element={<SupportPage />} />
-        <Route path="/gpa-calculator" element={<GpaCalculatorPage />} />
+        <Route path="/gpa-calculator" element={<SemesterView />} />
+        <Route path="/gpa-calculator/:semesterIndex" element={<CourseView />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
