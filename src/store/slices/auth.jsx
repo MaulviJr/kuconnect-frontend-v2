@@ -1,4 +1,4 @@
-// import * as api from "@/services/api"; // mock api.js we’ll build next
+import * as api from "@/services/api";
 
 const createAuthSlice = (set, get) => ({
   auth: {
