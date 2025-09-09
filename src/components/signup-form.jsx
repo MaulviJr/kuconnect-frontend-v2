@@ -1,15 +1,35 @@
+import useStore from "@/store";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 export function SignupForm({ className, ...props }) {
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const signup = useStore((state) => state.signup);
+  const navigate = useNavigate();
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    try {
+      await signup({ firstname, lastname, email, password });
+      navigate("/dashboard");
+    } catch (err) {
+      console.error("Signup failed:", err);
+    }
+  };
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2">
-          <form className="p-6 md:p-8">
+          <form onSubmit={handleSignup} className="p-6 md:p-8">
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
                 <h1 className="text-2xl font-bold">Create your account</h1>
@@ -20,11 +40,23 @@ export function SignupForm({ className, ...props }) {
               <div className="grid gap-3 md:grid-cols-2 md:gap-4">
                 <div className="grid gap-3">
                   <Label htmlFor="firstname">First name</Label>
-                  <Input id="firstname" placeholder="John" required />
+                  <Input
+                    id="firstname"
+                    placeholder="John"
+                    required
+                    value={firstname}
+                    onChange={(e) => setFirstname(e.target.value)}
+                  />
                 </div>
                 <div className="grid gap-3">
                   <Label htmlFor="lastname">Last name</Label>
-                  <Input id="lastname" placeholder="Doe" required />
+                  <Input
+                    id="lastname"
+                    placeholder="Doe"
+                    required
+                    value={lastname}
+                    onChange={(e) => setLastname(e.target.value)}
+                  />
                 </div>
               </div>
               <div className="grid gap-3">
@@ -34,11 +66,19 @@ export function SignupForm({ className, ...props }) {
                   type="email"
                   placeholder="m@example.com"
                   required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="grid gap-3">
                 <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" required />
+                <Input
+                  id="password"
+                  type="password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </div>
               <Button type="submit" className="w-full">
                 Sign up
