@@ -8,7 +8,7 @@ import {
   SheetClose,
   SheetDescription,
 } from "@/components/ui/sheet";
-import { useStore } from "@/store/store";
+import useStore from "@/store";
 import AppLayout from "@/components/layout";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";

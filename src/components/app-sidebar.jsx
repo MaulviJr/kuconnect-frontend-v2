@@ -46,19 +46,9 @@ const data = {
       icon: IconDashboard,
     },
     {
-      title: "Resources",
-      url: "/resources",
-      icon: IconFolder,
-    },
-    {
       title: "Ask Seniors",
       url: "/ask-seniors",
       icon: IconMessageQuestion,
-    },
-    {
-      title: "Support Groups",
-      url: "/support-groups",
-      icon: IconUsers,
     },
     {
       title: "GPA Calculator",
@@ -125,11 +115,6 @@ const data = {
       url: "#",
       icon: IconHelp,
     },
-    {
-      title: "Search",
-      url: "#",
-      icon: IconSearch,
-    },
   ],
   documents: [
     {
@@ -174,7 +159,7 @@ export function AppSidebar({ ...props }) {
       <SidebarContent>
         <NavMain items={data.navMain} />
         {/* <NavDocuments items={data.documents} /> */}
-        {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
+        <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
