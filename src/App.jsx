@@ -10,6 +10,7 @@ import ProtectedRoute from "./components/protected-route";
 import CourseView from "./pages/gpa-calculator/course-view";
 import SemesterView from "./pages/gpa-calculator/semester-view";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Onboarding from "./pages/onBoarding";
 
 function App() {
   const rehydrateAuth = useStore((state) => state.rehydrateAuth);
@@ -27,6 +28,14 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="*" element={<NotFound />} />
         {/* Protected routes */}
+        <Route
+          path="/onboarding"
+          element={
+            <ProtectedRoute>
+              <Onboarding />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/dashboard"
           element={
