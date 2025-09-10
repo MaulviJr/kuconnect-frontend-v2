@@ -1,5 +1,3 @@
-// src/pages/Onboarding.jsx
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -8,7 +6,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -16,9 +13,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import useStore from "@/store";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Onboarding() {
+  const navigate = useNavigate();
   const form = useForm({
     defaultValues: {
       department: "",
@@ -27,8 +29,15 @@ export default function Onboarding() {
   });
 
   const onSubmit = (values) => {
-    console.log("Onboarding values:", values);
-    // TODO: save in store or API
+    const { setDepartment, setSemester, completeOnboarding } =
+      useStore.getState();
+
+    setDepartment(values.department);
+    setSemester(values.semester);
+    completeOnboarding();
+
+    console.log("Saved onboarding:", values);
+    navigate("/dashboard");
   };
 
   return (
