@@ -22,7 +22,11 @@ function ProtectedRoute({ children }) {
   }
 
   // If onboarding is already completed but user tries to access onboarding page → redirect to dashboard
-  if (completed && location.pathname === "/onboarding") {
+  if (
+    completed &&
+    (location.pathname === "/onboarding" ||
+      location.pathname === "/onboarding/")
+  ) {
     return <Navigate to="/dashboard" replace />;
   }
 
