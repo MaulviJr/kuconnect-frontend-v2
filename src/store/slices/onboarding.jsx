@@ -3,6 +3,7 @@ export const createOnboardingSlice = (set) => ({
     department: "",
     semester: "",
     completed: false,
+    rehydrated: false,
   },
 
   setDepartment: (department) =>
@@ -12,6 +13,7 @@ export const createOnboardingSlice = (set) => ({
         department,
       },
     })),
+
   setSemester: (semester) =>
     set((state) => ({
       onboarding: {
@@ -19,19 +21,44 @@ export const createOnboardingSlice = (set) => ({
         semester,
       },
     })),
+
   completeOnboarding: () =>
-    set((state) => ({
-      onboarding: {
+    set((state) => {
+      const updated = {
         ...state.onboarding,
         completed: true,
-      },
-    })),
-  resetOnboarding: () =>
-    set(() => ({
+      };
+      localStorage.setItem("onboarding", JSON.stringify(updated));
+      return { onboarding: updated };
+    }),
+
+  resetOnboarding: () => {
+    localStorage.removeItem("onboarding");
+    return set(() => ({
       onboarding: {
         department: "",
         semester: "",
         completed: false,
+        rehydrated: true,
       },
-    })),
+    }));
+  },
+
+  rehydrateOnboarding: () => {
+    const raw = localStorage.getItem("onboarding");
+    if (raw) {
+      set({
+        onboarding: { ...JSON.parse(raw), rehydrated: true },
+      });
+    } else {
+      set({
+        onboarding: {
+          department: "",
+          semester: "",
+          completed: false,
+          rehydrated: true,
+        },
+      });
+    }
+  },
 });

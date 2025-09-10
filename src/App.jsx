@@ -5,18 +5,20 @@ import LoginPage from "./pages/login";
 import SignupPage from "./pages/signup";
 import NotFound from "./pages/notFound";
 import Dashboard from "./pages/dashboard";
+import Onboarding from "./pages/onBoarding";
 import AskSeniorsPage from "./pages/askSeniors";
 import ProtectedRoute from "./components/protected-route";
 import CourseView from "./pages/gpa-calculator/course-view";
 import SemesterView from "./pages/gpa-calculator/semester-view";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Onboarding from "./pages/onBoarding";
 
 function App() {
   const rehydrateAuth = useStore((state) => state.rehydrateAuth);
+  const rehydrateOnboarding = useStore((state) => state.rehydrateOnboarding);
 
   useEffect(() => {
     rehydrateAuth();
+    rehydrateOnboarding();
   }, []);
 
   return (
