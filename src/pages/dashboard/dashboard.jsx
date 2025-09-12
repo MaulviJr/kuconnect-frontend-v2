@@ -1,4 +1,5 @@
 import useStore from "@/store";
+import Loader from "@/components/loader";
 import AppLayout from "@/components/layout";
 import { useEffect, useState } from "react";
 import { getCourses } from "@/apis/dashboard";
@@ -30,7 +31,11 @@ export default function Dashboard() {
   }, [user]);
 
   if (loading) {
-    return <AppLayout>Loading courses...</AppLayout>;
+    return (
+      <AppLayout>
+        <Loader />
+      </AppLayout>
+    );
   }
 
   if (error) {

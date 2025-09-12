@@ -1,3 +1,4 @@
+import Loader from "./loader";
 import useStore from "@/store";
 import { Navigate, useLocation } from "react-router-dom";
 
@@ -7,7 +8,7 @@ function ProtectedRoute({ children }) {
 
   // If still rehydrating → show loader
   if (!rehydrated) {
-    return <div>Loading...</div>;
+    return <Loader fullScreen />;
   }
 
   // If not logged in → redirect to login
