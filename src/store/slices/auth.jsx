@@ -91,6 +91,45 @@ const createAuthSlice = (set, get) => ({
       }));
     }
   },
+
+  setDepartment: (department) => {
+    const { auth } = get();
+    const updatedUser = { ...auth.user, department };
+
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+    set({
+      auth: {
+        ...auth,
+        user: updatedUser,
+      },
+    });
+  },
+
+  setSemester: (semester) => {
+    const { auth } = get();
+    const updatedUser = { ...auth.user, semester };
+
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+    set({
+      auth: {
+        ...auth,
+        user: updatedUser,
+      },
+    });
+  },
+
+  completeOnboarding: () => {
+    const { auth } = get();
+    const updatedUser = { ...auth.user, completed: true };
+
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+    set({
+      auth: {
+        ...auth,
+        user: updatedUser,
+      },
+    });
+  },
 });
 
 export default createAuthSlice;
