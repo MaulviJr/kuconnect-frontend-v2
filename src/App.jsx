@@ -1,12 +1,12 @@
 import useStore from "./store";
 import Home from "./pages/home";
 import { useEffect } from "react";
-import LoginPage from "./pages/login";
-import SignupPage from "./pages/signup";
 import NotFound from "./pages/notFound";
 import Dashboard from "./pages/dashboard";
-import Onboarding from "./pages/onBoarding";
+import LoginPage from "./pages/auth/login";
+import SignupPage from "./pages/auth/signup";
 import AskSeniorsPage from "./pages/askSeniors";
+import Onboarding from "./pages/auth/onboarding";
 import ProtectedRoute from "./components/protected-route";
 import CourseView from "./pages/gpa-calculator/course-view";
 import SemesterView from "./pages/gpa-calculator/semester-view";
