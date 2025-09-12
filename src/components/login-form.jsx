@@ -1,6 +1,7 @@
 import useStore from "@/store";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import Loader from "@/components/Loader";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -12,18 +13,24 @@ export function LoginForm({ className, ...props }) {
   const location = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const login = useStore((state) => state.login);
   const from = location.state?.from?.pathname || "/dashboard";
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await login({ email, password });
+      setLoading(false);
       navigate(from, { replace: true });
     } catch (err) {
       console.error(err);
+      setLoading(false);
     }
   };
+
+  if (loading) return <Loader />;
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>

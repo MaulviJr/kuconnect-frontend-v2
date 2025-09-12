@@ -5,8 +5,6 @@ import {
   IconNotification,
   IconUserCircle,
 } from "@tabler/icons-react";
-
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,18 +20,28 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import Loader from "./loader";
 import useStore from "@/store";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getInitials } from "@/utils/avatar-helper";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-export function NavUser({ user }) {
-  const { isMobile } = useSidebar();
-  const logout = useStore((state) => state.logout);
+export function NavUser() {
   const navigate = useNavigate();
+  const { isMobile } = useSidebar();
+  const [loading, setLoading] = useState(false);
+  const { user } = useStore((state) => state.auth);
+  const logout = useStore((state) => state.logout);
 
   const handleLogout = () => {
+    setLoading(true);
     logout();
     navigate("/login");
+    setLoading(false);
   };
+
+  if (loading) return <Loader />;
 
   return (
     <SidebarMenu>
@@ -44,11 +52,13 @@ export function NavUser({ user }) {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
               <Avatar className="h-8 w-8 rounded-lg grayscale">
-                <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                <AvatarImage src={user.avatar} alt={user.fullName} />
+                <AvatarFallback className="rounded-lg">
+                  {getInitials(user.fullName)}
+                </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{user.name}</span>
+                <span className="truncate font-medium">{user.fullName}</span>
                 <span className="text-muted-foreground truncate text-xs">
                   {user.email}
                 </span>
@@ -64,11 +74,13 @@ export function NavUser({ user }) {
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                  <AvatarImage src={user.avatar} alt={user.fullName} />
+                  <AvatarFallback className="rounded-lg">
+                    {getInitials(user.fullName)}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">{user.name}</span>
+                  <span className="truncate font-medium">{user.fullName}</span>
                   <span className="text-muted-foreground truncate text-xs">
                     {user.email}
                   </span>
