@@ -28,16 +28,20 @@ export default function Onboarding() {
     },
   });
 
-  const onSubmit = (values) => {
-    const { setDepartment, setSemester, completeOnboarding } =
-      useStore.getState();
+  const onSubmit = async (values) => {
+    const { saveOnboarding } = useStore.getState();
 
-    setDepartment(values.department);
-    setSemester(values.semester);
-    completeOnboarding();
+    try {
+      await saveOnboarding({
+        department: values.department,
+        semester: values.semester,
+        completed: true,
+      });
 
-    console.log("Saved onboarding:", values);
-    navigate("/dashboard");
+      navigate("/dashboard");
+    } catch (err) {
+      console.error("Onboarding error:", err);
+    }
   };
 
   return (

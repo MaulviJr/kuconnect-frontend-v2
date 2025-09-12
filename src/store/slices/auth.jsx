@@ -92,43 +92,25 @@ const createAuthSlice = (set, get) => ({
     }
   },
 
-  setDepartment: (department) => {
-    const { auth } = get();
-    const updatedUser = { ...auth.user, department };
+  saveOnboarding: async (onboardingData) => {
+    try {
+      const { token, user } = await authApi.saveOnboarding(onboardingData);
 
-    localStorage.setItem("user", JSON.stringify(updatedUser));
-    set({
-      auth: {
-        ...auth,
-        user: updatedUser,
-      },
-    });
-  },
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
 
-  setSemester: (semester) => {
-    const { auth } = get();
-    const updatedUser = { ...auth.user, semester };
-
-    localStorage.setItem("user", JSON.stringify(updatedUser));
-    set({
-      auth: {
-        ...auth,
-        user: updatedUser,
-      },
-    });
-  },
-
-  completeOnboarding: () => {
-    const { auth } = get();
-    const updatedUser = { ...auth.user, completed: true };
-
-    localStorage.setItem("user", JSON.stringify(updatedUser));
-    set({
-      auth: {
-        ...auth,
-        user: updatedUser,
-      },
-    });
+      set((state) => ({
+        auth: {
+          ...state.auth,
+          token,
+          user,
+          isAuthenticated: true,
+          rehydrated: true,
+        },
+      }));
+    } catch (err) {
+      throw err.response?.data?.error || "Onboarding failed";
+    }
   },
 });
 
