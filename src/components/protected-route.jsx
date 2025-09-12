@@ -3,10 +3,9 @@ import { Navigate, useLocation } from "react-router-dom";
 
 function ProtectedRoute({ children }) {
   const location = useLocation();
-  const { completed } = useStore((state) => state.onboarding);
-  const { isAuthenticated, rehydrated } = useStore((state) => state.auth);
+  const { isAuthenticated, rehydrated, user } = useStore((state) => state.auth);
 
-  // If still rehydrating, show loader
+  // If still rehydrating → show loader
   if (!rehydrated) {
     return <div>Loading...</div>;
   }
@@ -17,13 +16,13 @@ function ProtectedRoute({ children }) {
   }
 
   // If logged in but onboarding not completed → redirect to onboarding
-  if (!completed && location.pathname !== "/onboarding") {
+  if (!user?.completed && location.pathname !== "/onboarding") {
     return <Navigate to="/onboarding" replace />;
   }
 
-  // If onboarding is already completed but user tries to access onboarding page → redirect to dashboard
+  // If onboarding is completed but user tries to access onboarding → redirect to dashboard
   if (
-    completed &&
+    user?.completed &&
     (location.pathname === "/onboarding" ||
       location.pathname === "/onboarding/")
   ) {
