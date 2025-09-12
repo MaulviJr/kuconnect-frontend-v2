@@ -6,24 +6,31 @@ import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import Loader from "@/components/Loader";
 
 export function SignupForm({ className, ...props }) {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const signup = useStore((state) => state.signup);
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await signup({ firstname, lastname, email, password });
+      setLoading(false);
       navigate("/dashboard");
     } catch (err) {
       console.error("Signup failed:", err);
+      setLoading(false);
     }
   };
+
+  if (loading) return <Loader />;
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
