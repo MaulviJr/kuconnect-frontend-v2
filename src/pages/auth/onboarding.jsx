@@ -93,16 +93,18 @@ export default function Onboarding() {
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="cs">
+                              <SelectItem value="computer science">
                                 Computer Science
                               </SelectItem>
-                              <SelectItem value="ee">
+                              <SelectItem value="electrical engineering">
                                 Electrical Engineering
                               </SelectItem>
-                              <SelectItem value="bba">
+                              <SelectItem value="business administration">
                                 Business Administration
                               </SelectItem>
-                              <SelectItem value="math">Mathematics</SelectItem>
+                              <SelectItem value="mathematics">
+                                Mathematics
+                              </SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
