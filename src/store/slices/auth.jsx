@@ -1,4 +1,4 @@
-import * as api from "@/services/api";
+import * as authApi from "@/apis/auth";
 
 const createAuthSlice = (set, get) => ({
   auth: {
@@ -10,42 +10,43 @@ const createAuthSlice = (set, get) => ({
 
   signup: async (formData) => {
     try {
-      const { token, user } = await api.signup(formData);
+      const { token, user } = await authApi.signup(formData);
 
-      // persist to localStorage
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      set({
+      set((state) => ({
         auth: {
+          ...state.auth,
           isAuthenticated: true,
           token,
           user,
           rehydrated: true,
         },
-      });
+      }));
     } catch (err) {
-      throw err.message || "Signup failed";
+      throw err.response?.data?.error || "Signup failed";
     }
   },
 
   login: async (credentials) => {
     try {
-      const { token, user } = await api.login(credentials);
+      const { token, user } = await authApi.login(credentials);
 
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      set({
+      set((state) => ({
         auth: {
+          ...state.auth,
           isAuthenticated: true,
           token,
           user,
           rehydrated: true,
         },
-      });
+      }));
     } catch (err) {
-      throw err.message || "Login failed";
+      throw err.response?.data?.error || "Login failed";
     }
   },
 
@@ -53,14 +54,15 @@ const createAuthSlice = (set, get) => ({
     localStorage.removeItem("token");
     localStorage.removeItem("user");
 
-    set({
+    set((state) => ({
       auth: {
+        ...state.auth,
         isAuthenticated: false,
         token: null,
         user: null,
         rehydrated: true,
       },
-    });
+    }));
   },
 
   rehydrateAuth: () => {
@@ -68,23 +70,25 @@ const createAuthSlice = (set, get) => ({
     const userRaw = localStorage.getItem("user");
 
     if (token && userRaw) {
-      set({
+      set((state) => ({
         auth: {
+          ...state.auth,
           isAuthenticated: true,
           token,
           user: JSON.parse(userRaw),
           rehydrated: true,
         },
-      });
+      }));
     } else {
-      set({
+      set((state) => ({
         auth: {
+          ...state.auth,
           isAuthenticated: false,
           token: null,
           user: null,
           rehydrated: true,
         },
-      });
+      }));
     }
   },
 });
