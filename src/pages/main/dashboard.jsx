@@ -57,7 +57,7 @@ export default function Dashboard() {
             <Card
               key={course.code}
               className="cursor-pointer hover:shadow-lg transition"
-              onClick={() => navigate(`/courses/${course.code}`)}>
+              onClick={() => navigate(`/courses/${course.code}/details`)}>
               <CardContent className="p-6">
                 <div className="flex flex-col text-left space-y-1">
                   {/* Course Code */}
