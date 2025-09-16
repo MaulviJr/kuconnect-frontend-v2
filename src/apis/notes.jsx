@@ -6,8 +6,13 @@ export const getNotes = async (courseCode) => {
   return res.data;
 };
 
-// UPLOAD a new note
-export const uploadNote = async (courseCode, data) => {
-  const res = await api.post(`/courses/${courseCode}/notes`, data);
+// UPLOAD a new note (FormData)
+export const uploadNote = async (courseCode, formData) => {
+  const res = await api.post(`/courses/${courseCode}/notes`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+
   return res.data;
 };

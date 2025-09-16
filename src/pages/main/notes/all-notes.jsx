@@ -9,13 +9,14 @@ import { getNotes } from "@/apis/notes";
 import Loader from "@/components/loader";
 import { useEffect, useState } from "react";
 import AppLayout from "@/components/layout";
-import { useParams } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Download, FileText } from "lucide-react";
+import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 export default function NotesPage() {
+  const navigate = useNavigate();
   const { courseId } = useParams();
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -23,7 +24,7 @@ export default function NotesPage() {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const data = await getNotes("CS-460");
+        const data = await getNotes("CS-460"); // TODO: replace with courseId when backend supports it
         setNotes(data.notes || []);
       } catch (err) {
         console.error(err);
@@ -33,6 +34,10 @@ export default function NotesPage() {
     };
     fetchNotes();
   }, [courseId]);
+
+  const handleUpload = () => {
+    navigate(`/courses/${courseId}/notes/upload`);
+  };
 
   if (loading) {
     return (
@@ -48,7 +53,9 @@ export default function NotesPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold text-primary">Download Notes</h1>
-          <Button className="bg-green-600 hover:bg-green-700">
+          <Button
+            className="bg-green-600 hover:bg-green-700"
+            onClick={handleUpload}>
             Upload Notes
           </Button>
         </div>
