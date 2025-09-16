@@ -17,6 +17,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PastPapersPage from "./pages/main/past-papers/all-past-papers";
 import VideoLecturesPage from "./pages/main/video-lectures/all-videos";
 import UploadNotes from "./pages/main/notes/upload-notes";
+import UploadPastPapers from "./pages/main/past-papers/upload-past-papers";
 
 function App() {
   const rehydrateAuth = useStore((state) => state.rehydrateAuth);
@@ -87,6 +88,14 @@ function App() {
           element={
             <ProtectedRoute>
               <PastPapersPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/courses/:courseId/past-papers/upload"
+          element={
+            <ProtectedRoute>
+              <UploadPastPapers />
             </ProtectedRoute>
           }
         />

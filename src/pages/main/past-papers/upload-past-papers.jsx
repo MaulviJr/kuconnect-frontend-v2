@@ -17,7 +17,7 @@ import * as z from "zod";
 import { useState } from "react";
 import Loader from "@/components/loader";
 import { useForm } from "react-hook-form";
-import { uploadNote } from "@/apis/notes";
+import { uploadPastPaper } from "@/apis/past-papers";
 import AppLayout from "@/components/layout";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -28,15 +28,12 @@ import { useNavigate, useParams } from "react-router-dom";
 // Validation schema
 const formSchema = z.object({
   title: z.string().min(1, "Course Title is required"),
-  topic: z.string().optional(),
   semester: z.string().min(1, "Semester is required"),
-  noteType: z.enum(["self", "inclass"]),
+  year: z.string().min(1, "Year is required"),
   description: z.string().optional(),
-  tags: z.string().optional(),
-  language: z.string().optional(),
 });
 
-export default function UploadNotes() {
+export default function UploadPastPapers() {
   const navigate = useNavigate();
   const { courseId } = useParams();
   const [files, setFiles] = useState([]);
@@ -47,12 +44,9 @@ export default function UploadNotes() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
-      topic: "",
       semester: "",
-      noteType: "self",
+      year: "",
       description: "",
-      tags: "",
-      language: "",
     },
   });
 
@@ -67,9 +61,9 @@ export default function UploadNotes() {
       Object.entries(values).forEach(([k, v]) => formData.append(k, v));
       formData.append("file", files[0]);
 
-      const res = await uploadNote("CS-460", formData); // TODO: replace with courseId when backend supports it
+      const res = await uploadPastPaper("CS-460", formData); // TODO: replace with courseId when backend supports it
       if (res?.success) {
-        navigate(`/courses/${courseId}/notes`);
+        navigate(`/courses/${courseId}/past-papers`);
       } else {
         setError(res?.error || "Upload failed.");
       }
@@ -90,11 +84,12 @@ export default function UploadNotes() {
   return (
     <AppLayout>
       <div className="px-8 py-10">
-        <h1 className="text-3xl font-bold text-primary">Upload your notes</h1>
+        <h1 className="text-3xl font-bold text-primary">Upload Past Papers</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              {/* Course Title */}
               <FormField
                 control={form.control}
                 name="title"
@@ -109,78 +104,7 @@ export default function UploadNotes() {
                 )}
               />
 
-              <FormField
-                control={form.control}
-                name="topic"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Topic/Chapter</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="semester"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Semester</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select semester" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {Array.from({ length: 8 }).map((_, i) => (
-                          <SelectItem key={i} value={`${i + 1}`}>{`Semester ${
-                            i + 1
-                          }`}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="noteType"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Note type</FormLabel>
-                    <div className="flex gap-6">
-                      <label className="flex gap-2 items-center">
-                        <input
-                          type="radio"
-                          value="self"
-                          checked={field.value === "self"}
-                          onChange={() => field.onChange("self")}
-                        />
-                        <span>Self-prepared</span>
-                      </label>
-                      <label className="flex gap-2 items-center">
-                        <input
-                          type="radio"
-                          value="inclass"
-                          checked={field.value === "inclass"}
-                          onChange={() => field.onChange("inclass")}
-                        />
-                        <span>In-class lecture</span>
-                      </label>
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
+              {/* Description */}
               <FormField
                 control={form.control}
                 name="description"
@@ -194,28 +118,63 @@ export default function UploadNotes() {
                 )}
               />
 
-              <div className="grid grid-cols-2 gap-4">
+              {/* Semester + Year side by side */}
+              <div className="grid grid-cols-2 gap-4 pb-2">
+                {/* Semester */}
                 <FormField
                   control={form.control}
-                  name="tags"
+                  name="semester"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Tags</FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
+                      <FormLabel>Semester</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select semester" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {Array.from({ length: 8 }).map((_, i) => (
+                            <SelectItem key={i} value={`${i + 1}`}>{`Semester ${
+                              i + 1
+                            }`}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
+
+                {/* Year */}
                 <FormField
                   control={form.control}
-                  name="language"
+                  name="year"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Language</FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
+                      <FormLabel>Year</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select year" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {Array.from({ length: 10 }).map((_, i) => {
+                            const year = new Date().getFullYear() - i;
+                            return (
+                              <SelectItem key={year} value={`${year}`}>
+                                {year}
+                              </SelectItem>
+                            );
+                          })}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
