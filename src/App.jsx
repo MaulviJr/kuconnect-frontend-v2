@@ -16,6 +16,7 @@ import SemesterView from "./pages/gpa-calculator/semester-view";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PastPapersPage from "./pages/main/past-papers/all-past-papers";
 import VideoLecturesPage from "./pages/main/video-lectures/all-videos";
+import UploadNotes from "./pages/main/notes/upload-notes";
 
 function App() {
   const rehydrateAuth = useStore((state) => state.rehydrateAuth);
@@ -62,6 +63,14 @@ function App() {
           element={
             <ProtectedRoute>
               <NotesPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/courses/:courseId/notes/upload"
+          element={
+            <ProtectedRoute>
+              <UploadNotes />
             </ProtectedRoute>
           }
         />
