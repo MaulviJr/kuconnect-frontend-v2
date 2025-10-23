@@ -1,7 +1,7 @@
 import useStore from "./store";
-import Home from "./pages/home";
+import Home from "./pages/Home";
 import { useEffect } from "react";
-import NotFound from "./pages/notFound";
+import NotFound from "./pages/NotFound";
 import LoginPage from "./pages/auth/login";
 import SignupPage from "./pages/auth/signup";
 import Dashboard from "./pages/main/dashboard";
