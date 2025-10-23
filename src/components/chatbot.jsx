@@ -147,7 +147,7 @@ function ChatBot({ isOpen, onToggle }) {
          exit={{ scale: 0, opacity: 0 }}
          transition={{ duration: 0.3, ease: "easeInOut" }}
          style={{ transformOrigin: "bottom right" }} // 👈 this is the magic
-         className="chats-container max-w-full w-96 aspect-[10/16] rounded-md overflow-hidden flex flex-col shadow-2xl bg-gray-100 fixed bottom-6 right-6 z-50"
+         className="chats-container max-w-full w-screen sm:w-96 aspect-[10/16] rounded-md overflow-hidden flex flex-col shadow-2xl bg-gray-100 fixed bottom-0 sm:bottom-6 right-0 sm:right-6 z-50 h-screen sm:h-auto"
        >
             <div
               className="px-4 py-2 bg-green-500"
