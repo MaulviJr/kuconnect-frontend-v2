@@ -5,7 +5,7 @@ import { Navigate, useLocation } from "react-router-dom";
 function ProtectedRoute({ children }) {
   const location = useLocation();
   const { isAuthenticated, rehydrated, user } = useStore((state) => state.auth);
-
+  
   // If still rehydrating → show loader
   if (!rehydrated) {
     return <Loader fullScreen />;
@@ -17,13 +17,13 @@ function ProtectedRoute({ children }) {
   }
 
   // If logged in but onboarding not completed → redirect to onboarding
-  if (!user?.completed && location.pathname !== "/onboarding") {
+  if (!user?.is_boarded && location.pathname !== "/onboarding") {
     return <Navigate to="/onboarding" replace />;
   }
 
   // If onboarding is completed but user tries to access onboarding → redirect to dashboard
   if (
-    user?.completed &&
+    user?.is_boarded &&
     (location.pathname === "/onboarding" ||
       location.pathname === "/onboarding/")
   ) {

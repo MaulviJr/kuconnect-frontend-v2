@@ -1,7 +1,7 @@
 import useStore from "@/store";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import Loader from "@/components/Loader";
+import Loader from "@/components/loader";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -60,7 +60,8 @@ export function LoginForm({ className, ...props }) {
                   <Label htmlFor="password">Password</Label>
                   <a
                     href="#"
-                    className="ml-auto text-sm underline-offset-2 hover:underline">
+                    className="ml-auto text-sm underline-offset-2 hover:underline"
+                  >
                     Forgot your password?
                   </a>
                 </div>

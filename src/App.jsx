@@ -17,6 +17,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PastPapersPage from "./pages/main/past-papers/all-past-papers";
 import VideoLecturesPage from "./pages/main/video-lectures/all-videos";
 import UploadNotes from "./pages/main/notes/upload-notes";
+import UploadVideos from "./pages/main/video-lectures/upload-videos";
 import UploadPastPapers from "./pages/main/past-papers/upload-past-papers";
 
 function App() {
@@ -80,6 +81,14 @@ function App() {
           element={
             <ProtectedRoute>
               <VideoLecturesPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/courses/:courseId/lectures/upload"
+          element={
+            <ProtectedRoute>
+              <UploadVideos />
             </ProtectedRoute>
           }
         />

@@ -18,26 +18,84 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useEffect, useState } from "react";
+import { fetchDepartments, fetchProgramsByDepartment } from "@/apis/catalog";
 
 export default function Onboarding() {
   const navigate = useNavigate();
   const form = useForm({
     defaultValues: {
-      department: "",
+      departmentId: "",
+      programId: "",
       semester: "",
     },
   });
+
+  const [departments, setDepartments] = useState([]);
+  const [programs, setPrograms] = useState([]);
+  const [isLoadingDepartments, setIsLoadingDepartments] = useState(false);
+  const [isLoadingPrograms, setIsLoadingPrograms] = useState(false);
+  const [departmentsError, setDepartmentsError] = useState("");
+  const [programsError, setProgramsError] = useState("");
+
+  useEffect(() => {
+    
+    let isMounted = true;
+    const loadDepartments = async () => {
+      setIsLoadingDepartments(true);
+      setDepartmentsError("");
+      try {
+        const res = await fetchDepartments();
+        if (isMounted) {
+          setDepartments(res?.data ?? []);
+        }
+      } catch (e) {
+        if (isMounted) setDepartmentsError("Failed to load departments");
+      } finally {
+        if (isMounted) setIsLoadingDepartments(false);
+      }
+    };
+    loadDepartments();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    const subscription = form.watch(async (values, { name }) => {
+      if (name === "departmentId") {
+        const deptId = values.departmentId;
+        // Reset program selection when department changes
+        form.setValue("programId", "");
+        setPrograms([]);
+        setProgramsError("");
+        if (!deptId) return;
+        setIsLoadingPrograms(true);
+        try {
+          const res = await fetchProgramsByDepartment(deptId);
+          setPrograms(res?.data ?? []);
+        } catch (e) {
+          setProgramsError("Failed to load programs for department");
+        } finally {
+          setIsLoadingPrograms(false);
+        }
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [form]);
 
   const onSubmit = async (values) => {
     const { saveOnboarding } = useStore.getState();
 
     try {
       await saveOnboarding({
-        department: values.department,
+        department_id: values.departmentId,
+        program_id: values.programId,
         semester: values.semester,
-        completed: true,
       });
 
+      // Navigate to dashboard after successful onboarding
+      console.log("Onboarding completed, navigating to dashboard...");
       navigate("/dashboard");
     } catch (err) {
       console.error("Onboarding error:", err);
@@ -79,34 +137,74 @@ export default function Onboarding() {
                     {/* Department */}
                     <FormField
                       control={form.control}
-                      name="department"
+                      name="departmentId"
                       rules={{ required: "Department is required" }}
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Department</FormLabel>
                           <Select
+                            disabled={isLoadingDepartments}
                             onValueChange={field.onChange}
                             value={field.value}>
                             <FormControl>
                               <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Select your department" />
+                                <SelectValue placeholder={isLoadingDepartments ? "Loading departments..." : "Select your department"} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="computer science">
-                                Computer Science
-                              </SelectItem>
-                              <SelectItem value="electrical engineering">
-                                Electrical Engineering
-                              </SelectItem>
-                              <SelectItem value="business administration">
-                                Business Administration
-                              </SelectItem>
-                              <SelectItem value="mathematics">
-                                Mathematics
-                              </SelectItem>
+                              {departments.map((dept) => (
+                                <SelectItem key={dept.id} value={dept.id}>
+                                  {dept.name}
+                                </SelectItem>
+                              ))}
                             </SelectContent>
                           </Select>
+                          {departmentsError ? (
+                            <p className="text-sm text-destructive mt-1">{departmentsError}</p>
+                          ) : null}
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Program */}
+                    <FormField
+                      control={form.control}
+                      name="programId"
+                      rules={{ required: "Program is required" }}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Program</FormLabel>
+                          <Select
+                            disabled={!form.watch("departmentId") || isLoadingPrograms}
+                            onValueChange={field.onChange}
+                            value={field.value}>
+                            <FormControl>
+                              <SelectTrigger className="w-full">
+                                <SelectValue
+                                  placeholder={
+                                    !form.watch("departmentId")
+                                      ? "Select department first"
+                                      : isLoadingPrograms
+                                      ? "Loading programs..."
+                                      : programs.length === 0
+                                      ? "No programs found"
+                                      : "Select your program"
+                                  }
+                                />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {programs.map((prog) => (
+                                <SelectItem key={prog.id} value={prog.id}>
+                                  {prog.name}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          {programsError ? (
+                            <p className="text-sm text-destructive mt-1">{programsError}</p>
+                          ) : null}
                           <FormMessage />
                         </FormItem>
                       )}
