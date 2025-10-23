@@ -2,16 +2,25 @@ import useStore from "@/store";
 import AppLayout from "@/components/layout";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
+import ChatBot from "@/components/chatbot";
+import { useState } from "react";
 
 export default function Dashboard() {
   const navigate = useNavigate();
   const { user, courses } = useStore((state) => state.auth);
+  const [isChatBotOpen, setIsChatBotOpen] = useState(false);
+
+  const toggleChatBot = () => {
+    setIsChatBotOpen(!isChatBotOpen);
+  };
 
   // No need for loading state or API calls - courses come from auth state
 
   return (
     <AppLayout>
-      <div className="flex flex-col items-center text-center py-10">
+      <div className="flex flex-col items-center text-center py-10 relative">
+        
+        <ChatBot isOpen={isChatBotOpen} onToggle={toggleChatBot} />
         <h1 className="text-3xl font-bold text-primary">
           Welcome Back, {user?.name || "Student"}
         </h1>
