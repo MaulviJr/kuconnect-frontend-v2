@@ -1,7 +1,8 @@
-
 import React from 'react';
 import { UploadCloud, Bot, PlaySquare, CheckSquare, ShieldCheck, UserCheck, Clock, BookOpen, BrainCircuit, Users, GraduationCap } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+
 // Renamed to 'Home' to match the component in your prompt
 const Section = ({ children, className, ...props }) => (
   // Removed default horizontal padding, will apply within max-w container
@@ -14,15 +15,52 @@ const Section = ({ children, className, ...props }) => (
 );
 
 // --- Reusable Title Component ---
+// MODIFIED: Wrapped title in motion.div to animate all titles
 const SectionTitle = ({ children }) => (
-    <div className="mb-12 md:mb-16 text-center">
-         <h2 className="inline-block text-3xl md:text-4xl font-bold text-[#178a2d] border-2 border-dashed border-[#178a2d] rounded-full px-6 py-3">
-             {children}
-         </h2>
-    </div>
+  <motion.div
+    className="mb-12 md:mb-16 text-center"
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    viewport={{ once: true }}
+  >
+    <h2 className="inline-block text-3xl md:text-4xl font-bold text-[#178a2d] border-2 border-dashed border-[#178a2d] rounded-full px-6 py-3">
+      {children}
+    </h2>
+  </motion.div>
 );
 
 export default function Home() {
+
+  // --- MODIFIED: Added Animation Variants ---
+  // Simple fade-in from bottom
+  const fadeInFromBottom = {
+    initial: { opacity: 0, y: 30 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, ease: 'easeInOut' },
+    viewport: { once: true },
+  };
+
+  // Stagger container for grids
+  const staggerContainer = {
+    whileInView: {
+      transition: {
+        staggerChildren: 0.1, // Each child animates 0.1s after the previous
+      },
+    },
+    viewport: { once: true },
+  };
+
+  // Stagger item
+  const itemFadeIn = {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: 0.5 }
+    // viewport will be inherited from parent
+  };
+  // --- End of Animation Variants ---
+
+
   return (
     <>
       {/* Font definitions remain the same */}
@@ -91,29 +129,14 @@ export default function Home() {
         }
       `}</style>
 
-      {/* Main container:
-        - relative: Allows positioning children (like blobs) absolutely inside it.
-        - min-h-screen: Takes at least the full height of the screen.
-        - overflow-hidden: Prevents background blobs from causing scrollbars.
-        - bg-gray-50: A light background for the page.
-      */}
       <div className="relative min-h-screen w-full font-['Poppins'] overflow-hidden bg-gray-50">
         {/* Decorative Blurred Blobs (positioned relative to the main container) */}
         <div className="absolute -left-32 -top-32 w-96 h-96 md:w-[473px] md:h-[453px] bg-[#7bb486b4] rounded-full blur-[83px] opacity-70 z-0"></div>
         <div className="absolute -bottom-32 -left-32 w-96 h-96 md:w-[473px] md:h-[453px] bg-[#7bb48691] rounded-full blur-[83px] opacity-70 z-0"></div>
         <div className="absolute -bottom-32 -right-32 w-96 h-96 md:w-[473px] md:h-[453px] bg-[#7bb48691] rounded-full blur-[83px] opacity-70 z-0"></div>
 
-        {/* Content Wrapper:
-          - relative z-10: Sits on top of the blobs.
-          - min-h-screen: Matches the parent height.
-          - flex flex-col: Arranges children (Nav, Hero) vertically.
-        */}
         <div className="relative z-10 min-h-screen flex flex-col">
-          {/* Navigation Bar:
-            - flex justify-between items-center: Arranges logo (left) and buttons (right).
-            - max-w-7xl mx-auto: Centers the content with a max-width (good for 1920x1080).
-            - p-4 md:p-6: Responsive padding.
-          */}
+          {/* Navigation Bar */}
           <nav className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex justify-between items-center">
             <div className="flex items-center gap-2">
               {/* Simplified the 3-line logo for responsiveness */}
@@ -128,305 +151,325 @@ export default function Home() {
             </div>
 
             <div className="flex items-center gap-2 md:gap-4">
-             <Link 
-    to="/signup" 
-    className="px-4 py-1.5 md:px-6 md:py-2 text-[14px] md:text-lg text-white font-medium bg-gradient-to-b from-[#2d9a42] to-[#39bd53] rounded-full shadow-md hover:opacity-90 transition-opacity"
-  >
-    SignUp
-  </Link>
-              <Link 
-    to="/login"
-    className="px-4 py-1.5 md:px-6 md:py-2 text-[14px] md:text-lg text-[#2d9a42] font-medium rounded-full hover:bg-gray-100 transition-colors"
-  >
-    Login
-  </Link>
+              <Link
+                to="/signup"
+                className="px-4 py-1.5 md:px-6 md:py-2 text-[14px] md:text-lg text-white font-medium bg-gradient-to-b from-[#2d9a42] to-[#39bd53] rounded-full shadow-md hover:opacity-90 transition-opacity"
+              >
+                SignUp
+              </Link>
+              <Link
+                to="/login"
+                className="px-4 py-1.5 md:px-6 md:py-2 text-[14px] md:text-lg text-[#2d9a42] font-medium rounded-full hover:bg-gray-100 transition-colors"
+              >
+                Login
+              </Link>
             </div>
           </nav>
 
-          {/* Hero Content:
-            - flex-grow: Takes up the remaining vertical space.
-            - flex items-center justify-center: Centers the content grid.
-            - p-4: Padding for mobile.
-          */}
+          {/* Hero Content */}
           <main className="flex-grow flex items-center justify-center p-4 md:p-8">
-            {/* This is the responsive grid:
-              - grid-cols-1: On mobile, one column (stacks items).
-              - lg:grid-cols-2: On large screens (1024px+), switch to two columns.
-              - max-w-7xl: Matches nav width for a clean look on 1920x1080.
-            */}
             <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-              {/* Column 1: Text Box */}
-              <div className="w-full max-w-2xl mx-auto lg:mx-0">
-                <div className="shadow-lg">
-                  {/* "WELCOME TO" Header */}
-                  <div className="bg-[#2d9a42] rounded-t-[34px] py-4 px-6 text-center">
-                    <h2 className="text-[#f5fdf7] text-4xl md:text-6xl font-['Poppins']">
-                      WELCOME TO
-                    </h2>
-                  </div>
 
-                  {/* Main Content Box */}
-                  <div className="bg-transparent border-4 border-[#178a2d] rounded-b-[30px] p-6 md:p-10 text-center">
-                    <h1 className="text-[#2d9a42] text-[80px] sm:text-[100px] xl:text-[140px] leading-none font-['Bebas_Neue'] whitespace-nowrap">
-                      KU Connect
-                    </h1>
-                    {/* Underline */}
-                    <div className="w-3/4 max-w-md h-[2px] bg-[#2d9a42] mx-auto -mt-3.5 md:mt-4"></div>
-                    {/* Subtitle */}
-                    <p className="text-[#2d9a42] text-xl md:text-3xl font-['Poppins'] mt-6 md:mt-8">
-                      Your Academic Companion at Karachi University
-                    </p>
-                  </div>
-                </div>
-              </div>
+              {/* MODIFIED: Wrapped Hero Column 1 in motion.div */}
+              <motion.div
+                className="w-full max-w-120 lg:ml-12 mx-auto lg:mx-0"
+                {...fadeInFromBottom} // Apply animation
+              >
+                <img
+                  src="/assets/Group.png"
+                  alt="KU Connect Banner"
+                  className="w-full h-auto "
+                />
+              </motion.div>
 
-              {/* Column 2: Hero Image */}
-              <div className="w-full">
-                {/* This div displays your hero image.
-                  - Using padding-top to create an aspect ratio is a good trick,
-                    but a fixed height on large screens is also fine.
-                  - h-64 sm:h-96 lg:h-[640px]: Sets responsive heights. Increased lg height.
-                  - rounded-2xl shadow-lg: For modern aesthetics.
-                */}
+              {/* MODIFIED: Wrapped Hero Column 2 in motion.div with a delay */}
+              <motion.div
+                className="w-full"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: 'easeInOut' }} // Added delay
+                viewport={{ once: true }}
+              >
                 <div
                   className="w-full h-[460px]  xl:h-[640px] bg-cover bg-center rounded-2xl"
                   style={{
                     backgroundImage:
-                      "url('https://design.penpot.app/assets/by-file-media-id/58522da1-b1ab-81bc-8006-95b857704d79')",
+                      "url('/assets/connect-hero-img.png')",
                   }}
                 >
                   {/* Image is applied via background, no content needed here */}
                 </div>
-              </div>
+              </motion.div>
             </div>
           </main>
         </div>
 
         {/* --- REVISED AGAIN: About Us Section --- */}
-        {/* Adjusted padding, background */}
         <section className="relative z-10 w-full pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden">
-           {/* Decorative dashed lines - Adjusted positioning */}
-           <svg
-              className="absolute top-[5%] left-[10%] w-24 h-auto text-[#178a2d] opacity-50 hidden lg:block" /* Adjusted position */
-              fill="none" viewBox="0 0 79 613" xmlns="http://www.w3.org/2000/svg">
-              <path d="M43.785 8C43.785 8 -48.2749 131.62 --3.72083 238.672C50.8331 345.724 105.387 529.241 -10.54 621" stroke="currentColor" strokeWidth="7" strokeDasharray="17 17"/>
-            </svg>
-            <svg
-              className="absolute bottom-[5%] right-[10%] w-72 h-auto text-[#178a2d] opacity-50 hidden lg:block" /* Adjusted position */
-              fill="none" viewBox="0 0 673 395" xmlns="http://www.w3.org/2000/svg">
-              <path d="M17 378C17 378 75 226 334 205C435.172 196.797 511.625 161.128 567.232 120.703C653.98 57.6389 690 -18 690 -18" stroke="currentColor" strokeWidth="7" strokeDasharray="17 17"/>
-           </svg>
+          {/* Decorative dashed lines - Adjusted positioning */}
+          <svg
+            className="absolute top-[5%] left-[10%] w-24 h-auto text-[#178a2d] opacity-50 hidden lg:block" /* Adjusted position */
+            fill="none" viewBox="0 0 79 613" xmlns="http://www.w3.org/2000/svg">
+            <path d="M43.785 8C43.785 8 -48.2749 131.62 --3.72083 238.672C50.8331 345.724 105.387 529.241 -10.54 621" stroke="currentColor" strokeWidth="7" strokeDasharray="17 17" />
+          </svg>
+          <svg
+            className="absolute bottom-[5%] right-[10%] w-72 h-auto text-[#178a2d] opacity-50 hidden lg:block" /* Adjusted position */
+            fill="none" viewBox="0 0 673 395" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17 378C17 378 75 226 334 205C435.172 196.797 511.625 161.128 567.232 120.703C653.98 57.6389 690 -18 690 -18" stroke="currentColor" strokeWidth="7" strokeDasharray="17 17" />
+          </svg>
 
-          {/* <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-           */}
-            {/* **** MODIFIED LINE **** Added lg:items-stretch */}
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 lg:items-stretch">
-            {/* Column 1: About Text */}
-            {/* Specific rounded corners matching image_17c1be.jpg */}
-            {/* Using arbitrary values for large rounding */}
-            {/* <div className="bg-[#178a2d] rounded-tl-[60px] rounded-bl-[60px] rounded-tr-[30px] rounded-br-[30px] p-8 md:p-12 lg:p-14 shadow-xl order-last lg:order-first"> Darker green */}
-               <div className="bg-[#178a2d] rounded-tl-[0px] rounded-bl-[0px] rounded-tr-[30px] rounded-br-[30px] p-8 md:p-12 lg:p-14 shadow-xl order-last lg:order-first h-full flex flex-col justify-center">
+
+            {/* MODIFIED: Wrapped About Us Column 1 (Text) in motion.div */}
+            <motion.div
+              className="bg-[#178a2d] rounded-tl-[0px] rounded-bl-[0px] rounded-tr-[30px] rounded-br-[30px] p-8 md:p-12 lg:p-14 shadow-xl order-last lg:order-first h-full flex flex-col justify-center"
+              {...fadeInFromBottom}
+            >
               <p className="text-white  text-lg lg:text-2xl leading-relaxed text-left font-['Poppins']"> {/* Slightly smaller text */}
                 KU Connect is a student-driven platform designed to simplify your university journey. Access shared study resources, explore past quizzes, stay updated on deadlines, and collaborate with peers – all in one place. Whether you're preparing for exams or sharing your own notes, KU Connect makes academic life easier, more organized, and more connected.
               </p>
-            </div>
+            </motion.div>
 
-            {/* Column 2: Question Mark Images */}
-            {/* Adjusted heights and positions */}
-            <div className="relative w-full h-56 sm:h-72 md:h-80 lg:h-[450px] flex items-center justify-center order-first lg:order-last">
-               {/* Main image */}
-               <img
-                  src="https://design.penpot.app/assets/by-file-media-id/58522da1-b1ab-81bc-8006-98830ef0c6cb"
-                  alt="Question Mark"
-                  className="relative z-10 w-40 h-44 sm:w-48 sm:h-52 md:w-56 md:h-60 lg:w-[280px] lg:h-[300px] object-contain" /* Adjusted size */
-               />
-               {/* Blurred image 1 (Top Left) */}
-               <img
-                  src="https://design.penpot.app/assets/by-file-media-id/58522da1-b1ab-81bc-8006-98830ef0c6cb"
-                  alt="Blurred Question Mark"
-                  className="absolute z-0 w-32 h-36 sm:w-40 sm:h-44 md:w-48 md:h-52 lg:w-56 lg:h-60 object-contain blur-md opacity-60 top-[5%] left-[20%] transform -rotate-[15deg]" /* Adjusted position/rotation */
+            {/* MODIFIED: Wrapped About Us Column 2 (Image) in motion.div */}
+            <motion.div
+              className="relative w-full h-56 sm:h-72 md:h-80 lg:h-[450px] flex items-center justify-center order-first lg:order-last"
+              {...fadeInFromBottom}
+            >
+              {/* Main image */}
+              <img
+                src="/assets/question-mark.png"
+                alt="Question Mark"
+                className="relative z-10 w-40 h-44 sm:w-48 sm:h-52 md:w-56 md:h-60 lg:w-[280px] lg:h-[300px] object-contain" /* Adjusted size */
+              />
+              {/* Blurred image 1 (Top Left) */}
+              <img
+                src="/assets/question-mark.png"
+                alt="Blurred Question Mark"
+                className="absolute z-0 w-32 h-36 sm:w-40 sm:h-44 md:w-48 md:h-52 lg:w-56 lg:h-60 object-contain blur-md opacity-60 top-[5%] left-[20%] transform -rotate-[15deg]" /* Adjusted position/rotation */
 
-               />
-               {/* Blurred image 2 (Bottom Right) */}
-                <img
-                  src="https://design.penpot.app/assets/by-file-media-id/58522da1-b1ab-81bc-8006-98830ef0c6cb"
-                  alt="Blurred Question Mark"
-                  className="absolute z-0 w-32 h-36 sm:w-40 sm:h-44 md:w-48 md:h-52 lg:w-56 lg:h-60 object-contain blur-lg opacity-50 bottom-[5%] right-[20%] transform rotate-[15deg]" /* Adjusted position/rotation */
-               />
-            </div>
+              />
+              {/* Blurred image 2 (Bottom Right) */}
+              <img
+                src="/assets/question-mark.png"
+                alt="Blurred Question Mark"
+                className="absolute z-0 w-32 h-36 sm:w-40 sm:h-44 md:w-48 md:h-52 lg:w-56 lg:h-60 object-contain blur-lg opacity-50 bottom-[5%] right-[20%] transform rotate-[15deg]" /* Adjusted position/rotation */
+              />
+            </motion.div>
           </div>
         </section>
         {/* --- End of About Us Section --- */}
-          {/* --- Features Overview Section --- */}
+
+        {/* --- Features Overview Section --- */}
         <Section>
-             <SectionTitle>Features Overview</SectionTitle>
-             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                 {/* Feature Cards ... */}
-                <div className="bg-gradient-to-br from-[#25a83e] to-[#1a8a2e] p-6 rounded-2xl text-white text-center flex flex-col items-center shadow-lg hover:shadow-emerald-300/50 transition-shadow duration-300"> {/* Added hover effect */}
-                    <UploadCloud size={48} className="mb-3"/>
-                    <h3 className="text-xl font-semibold mb-2">Upload And Share</h3>
-                    <p className="text-sm opacity-90">Easily upload notes, past papers, and other study materials.</p>
-                </div>
-                 <div className="bg-gradient-to-br from-[#25a83e] to-[#1a8a2e] p-6 rounded-2xl text-white text-center flex flex-col items-center shadow-lg hover:shadow-emerald-300/50 transition-shadow duration-300">
-                    <Bot size={48} className="mb-3"/>
-                    <h3 className="text-xl font-semibold mb-2">AI Chatbot For Study</h3>
-                    <p className="text-sm opacity-90">Get instant help and explanations on various topics.</p>
-                </div>
-                 <div className="bg-gradient-to-br from-[#25a83e] to-[#1a8a2e] p-6 rounded-2xl text-white text-center flex flex-col items-center shadow-lg hover:shadow-emerald-300/50 transition-shadow duration-300">
-                    <PlaySquare size={48} className="mb-3"/>
-                    <h3 className="text-xl font-semibold mb-2">Video Lectures</h3>
-                    <p className="text-sm opacity-90">Access recorded lectures and supplementary videos.</p>
-                </div>
-                 <div className="bg-gradient-to-br from-[#25a83e] to-[#1a8a2e] p-6 rounded-2xl text-white text-center flex flex-col items-center shadow-lg hover:shadow-emerald-300/50 transition-shadow duration-300">
-                    <CheckSquare size={48} className="mb-3"/>
-                    <h3 className="text-xl font-semibold mb-2">Test Yourself (Quiz)</h3>
-                    <p className="text-sm opacity-90">Practice with quizzes covering various course materials.</p>
-                </div>
-                 <div className="bg-gradient-to-br from-[#25a83e] to-[#1a8a2e] p-6 rounded-2xl text-white text-center flex flex-col items-center shadow-lg hover:shadow-emerald-300/50 transition-shadow duration-300">
-                    <ShieldCheck size={48} className="mb-3"/>
-                    <h3 className="text-xl font-semibold mb-2">Secure & Private</h3>
-                    <p className="text-sm opacity-90">Your data and contributions are kept secure.</p>
-                </div>
-                <div className="bg-gradient-to-br from-[#25a83e] to-[#1a8a2e] p-6 rounded-2xl text-white text-center flex flex-col items-center shadow-lg hover:shadow-emerald-300/50 transition-shadow duration-300">
-                    <UserCheck size={48} className="mb-3"/>
-                    <h3 className="text-xl font-semibold mb-2">Admin Approved</h3>
-                    <p className="text-sm opacity-90">Content is verified for quality and relevance.</p>
-                </div>
-             </div>
+          <SectionTitle>Features Overview</SectionTitle>
+          {/* MODIFIED: Added stagger container to the grid */}
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+            {...staggerContainer} // Apply stagger
+          >
+            {/* MODIFIED: Wrapped each card in motion.div */}
+            <motion.div
+              className="bg-gradient-to-br from-[#25a83e] to-[#1a8a2e] p-6 rounded-2xl text-white text-center flex flex-col items-center shadow-lg hover:shadow-emerald-300/50 transition-shadow duration-300"
+              variants={itemFadeIn} // Use item variant
+            >
+              <UploadCloud size={48} className="mb-3" />
+              <h3 className="text-xl font-semibold mb-2">Upload And Share</h3>
+              <p className="text-sm opacity-90">Easily upload notes, past papers, and other study materials.</p>
+            </motion.div>
+
+            <motion.div
+              className="bg-gradient-to-br from-[#25a83e] to-[#1a8a2e] p-6 rounded-2xl text-white text-center flex flex-col items-center shadow-lg hover:shadow-emerald-300/50 transition-shadow duration-300"
+              variants={itemFadeIn}
+            >
+              <Bot size={48} className="mb-3" />
+              <h3 className="text-xl font-semibold mb-2">AI Chatbot For Study</h3>
+              <p className="text-sm opacity-90">Get instant help and explanations on various topics.</p>
+            </motion.div>
+
+            <motion.div
+              className="bg-gradient-to-br from-[#25a83e] to-[#1a8a2e] p-6 rounded-2xl text-white text-center flex flex-col items-center shadow-lg hover:shadow-emerald-300/50 transition-shadow duration-300"
+              variants={itemFadeIn}
+            >
+              <PlaySquare size={48} className="mb-3" />
+              <h3 className="text-xl font-semibold mb-2">Video Lectures</h3>
+              <p className="text-sm opacity-90">Access recorded lectures and supplementary videos.</p>
+            </motion.div>
+
+            <motion.div
+              className="bg-gradient-to-br from-[#25a83e] to-[#1a8a2e] p-6 rounded-2xl text-white text-center flex flex-col items-center shadow-lg hover:shadow-emerald-300/50 transition-shadow duration-300"
+              variants={itemFadeIn}
+            >
+              <CheckSquare size={48} className="mb-3" />
+              <h3 className="text-xl font-semibold mb-2">Test Yourself (Quiz)</h3>
+              <p className="text-sm opacity-90">Practice with quizzes covering various course materials.</p>
+            </motion.div>
+
+            <motion.div
+              className="bg-gradient-to-br from-[#25a83e] to-[#1a8a2e] p-6 rounded-2xl text-white text-center flex flex-col items-center shadow-lg hover:shadow-emerald-300/50 transition-shadow duration-300"
+              variants={itemFadeIn}
+            >
+              <ShieldCheck size={48} className="mb-3" />
+              <h3 className="text-xl font-semibold mb-2">Secure & Private</h3>
+              <p className="text-sm opacity-90">Your data and contributions are kept secure.</p>
+            </motion.div>
+
+            <motion.div
+              className="bg-gradient-to-br from-[#25a83e] to-[#1a8a2e] p-6 rounded-2xl text-white text-center flex flex-col items-center shadow-lg hover:shadow-emerald-300/50 transition-shadow duration-300"
+              variants={itemFadeIn}
+            >
+              <UserCheck size={48} className="mb-3" />
+              <h3 className="text-xl font-semibold mb-2">Admin Approved</h3>
+              <p className="text-sm opacity-90">Content is verified for quality and relevance.</p>
+            </motion.div>
+          </motion.div>
         </Section>
         {/* --- End of Features Section --- */}
-             {/* --- How It Works Section --- */}
+
+        {/* --- How It Works Section --- */}
         <Section className="bg-emerald-50/50">
-            <SectionTitle>How It Works</SectionTitle>
-             <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 lg:gap-y-0">
-                 {/* Steps ... */}
-                <div className="text-center relative px-4">
-                     <div className="inline-flex items-center justify-center w-12 h-12 mb-4 bg-[#178a2d] text-white rounded-full font-bold text-xl">1</div>
-                     <h3 className="text-xl font-semibold mb-2 text-[#178a2d]">Signup</h3>
-                     <p className="text-gray-600">Create your secure account in minutes.</p>
-                     <div className="connector-line mt-4 lg:hidden"></div>
-                     <div className="connector-curve curve-1-2 hidden lg:block"></div>
-                 </div>
-                <div className="text-center relative px-4">
-                     <div className="inline-flex items-center justify-center w-12 h-12 mb-4 bg-[#178a2d] text-white rounded-full font-bold text-xl">2</div>
-                     <h3 className="text-xl font-semibold mb-2 text-[#178a2d]">Explore</h3>
-                     <p className="text-gray-600">Access notes, videos, quizzes, and past papers.</p>
-                     <div className="connector-line-horizontal mt-6 md:hidden"></div>
-                     <div className="connector-line mt-4 lg:hidden"></div>
-                </div>
-                <div className="text-center relative px-4">
-                     <div className="inline-flex items-center justify-center w-12 h-12 mb-4 bg-[#178a2d] text-white rounded-full font-bold text-xl">3</div>
-                     <h3 className="text-xl font-semibold mb-2 text-[#178a2d]">Contribute</h3>
-                     <p className="text-gray-600">Share your own valuable study material.</p>
-                     <div className="connector-line mt-4 lg:hidden"></div>
-                     <div className="connector-curve curve-3-4 hidden lg:block"></div>
-                 </div>
-                <div className="text-center relative px-4">
-                     <div className="inline-flex items-center justify-center w-12 h-12 mb-4 bg-[#178a2d] text-white rounded-full font-bold text-xl">4</div>
-                     <h3 className="text-xl font-semibold mb-2 text-[#178a2d]">Connect</h3>
-                     <p className="text-gray-600">Engage with peers on the chatbot or forums.</p>
-                </div>
-            </div>
+          <SectionTitle>How It Works</SectionTitle>
+          {/* MODIFIED: Added stagger container to the grid */}
+          <motion.div
+            className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 lg:gap-y-0"
+            {...staggerContainer}
+          >
+            {/* MODIFIED: Wrapped each step in motion.div */}
+            <motion.div className="text-center relative px-4" variants={itemFadeIn}>
+              <div className="inline-flex items-center justify-center w-12 h-12 mb-4 bg-[#178a2d] text-white rounded-full font-bold text-xl">1</div>
+              <h3 className="text-xl font-semibold mb-2 text-[#178a2d]">Signup</h3>
+              <p className="text-gray-600">Create your secure account in minutes.</p>
+              <div className="connector-line mt-4 lg:hidden"></div>
+              <div className="connector-curve curve-1-2 hidden lg:block"></div>
+            </motion.div>
+
+            <motion.div className="text-center relative px-4" variants={itemFadeIn}>
+              <div className="inline-flex items-center justify-center w-12 h-12 mb-4 bg-[#178a2d] text-white rounded-full font-bold text-xl">2</div>
+              <h3 className="text-xl font-semibold mb-2 text-[#178a2d]">Explore</h3>
+              <p className="text-gray-600">Access notes, videos, quizzes, and past papers.</p>
+              <div className="connector-line-horizontal mt-6 md:hidden"></div>
+              <div className="connector-line mt-4 lg:hidden"></div>
+            </motion.div>
+
+            <motion.div className="text-center relative px-4" variants={itemFadeIn}>
+              <div className="inline-flex items-center justify-center w-12 h-12 mb-4 bg-[#178a2d] text-white rounded-full font-bold text-xl">3</div>
+              <h3 className="text-xl font-semibold mb-2 text-[#178a2d]">Contribute</h3>
+              <p className="text-gray-600">Share your own valuable study material.</p>
+              <div className="connector-line mt-4 lg:hidden"></div>
+              <div className="connector-curve curve-3-4 hidden lg:block"></div>
+            </motion.div>
+
+            <motion.div className="text-center relative px-4" variants={itemFadeIn}>
+              <div className="inline-flex items-center justify-center w-12 h-12 mb-4 bg-[#178a2d] text-white rounded-full font-bold text-xl">4</div>
+              <h3 className="text-xl font-semibold mb-2 text-[#178a2d]">Connect</h3>
+              <p className="text-gray-600">Engage with peers on the chatbot or forums.</p>
+            </motion.div>
+          </motion.div>
         </Section>
         {/* --- End of How It Works Section --- */}
 
-              {/* --- Why Choose Section --- */}
-  <Section>
-    <SectionTitle>Why Choose KU Connect?</SectionTitle>
-    
-    {/*
-      FIX: Changed from 3 columns to a 5-column grid on large screens.
-      The icon columns span 1 part each (lg:col-span-1).
-      The middle text-box column spans 3 parts (lg:col-span-3).
-    */}
-    <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center">
-        
-        {/* Column 1: Icons (Takes 1/5 of the width on LG screens) */}
-        <div className="flex flex-row lg:flex-col items-center justify-around gap-12 md:gap-12 lg:col-span-1">
-            <Clock size={128} className="text-[#178a2d]"/>
-            <BrainCircuit size={128} className="text-[#178a2d]"/>
-        </div>
-            
-        {/* Column 2: 2x2 Grid (Takes 3/5 of the width on LG screens) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:col-span-3">
-            <div className="bg-emerald-100 p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+        {/* --- Why Choose Section --- */}
+        <Section>
+          <SectionTitle>Why Choose KU Connect?</SectionTitle>
+
+          {/* MODIFIED: Added stagger container to the 5-column grid */}
+          <motion.div
+            className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center"
+            {...staggerContainer}
+          >
+
+            {/* MODIFIED: Wrapped column 1 in motion.div */}
+            <motion.div
+              className="flex flex-row lg:flex-col items-center justify-around gap-12 md:gap-12 lg:col-span-1"
+              variants={itemFadeIn}
+            >
+              <Clock size={128} className="text-[#178a2d]" />
+              <BrainCircuit size={128} className="text-[#178a2d]" />
+            </motion.div>
+
+            {/* MODIFIED: Wrapped column 2 (grid) in motion.div */}
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:col-span-3"
+              variants={itemFadeIn} // This 2x2 grid will fade in as one block
+            >
+              <div className="bg-emerald-100 p-6 rounded-lg shadow hover:shadow-md transition-shadow">
                 <h3 className="text-xl font-semibold text-[#178a2d] mb-2">Time Saving</h3>
                 <p className="text-gray-700">Find what you need quickly, all in one place.</p>
-            </div>
-            <div className="bg-emerald-100 p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+              </div>
+              <div className="bg-emerald-100 p-6 rounded-lg shadow hover:shadow-md transition-shadow">
                 <h3 className="text-xl font-semibold text-[#178a2d] mb-2">Organized Content</h3>
                 <p className="text-gray-700">Semester-wise structure keeps study material tidy.</p>
-            </div>
-            <div className="bg-emerald-100 p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+              </div>
+              <div className="bg-emerald-100 p-6 rounded-lg shadow hover:shadow-md transition-shadow">
                 <h3 className="text-xl font-semibold text-[#178a2d] mb-2">Smart Study Support</h3>
                 <p className="text-gray-700">AI chatbot to assist with queries instantly.</p>
-            </div>
-            <div className="bg-emerald-100 p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+              </div>
+              <div className="bg-emerald-100 p-6 rounded-lg shadow hover:shadow-md transition-shadow">
                 <h3 className="text-xl font-semibold text-[#178a2d] mb-2">By Students, For Students</h3>
                 <p className="text-gray-700">A platform built around actual student needs.</p>
-            </div>
-        </div>
+              </div>
+            </motion.div>
 
-        {/* Column 3: Icons (Takes 1/5 of the width on LG screens) */}
-        <div className="flex flex-row lg:flex-col items-center justify-around gap-4 lg:col-span-1">
-            
-              <BookOpen size={128} className="text-[#178a2d]"/>
-            <Users size={128} className="text-[#178a2d]"/>
-        </div>
-    </div>
-</Section>
+            {/* MODIFIED: Wrapped column 3 in motion.div */}
+            <motion.div
+              className="flex flex-row lg:flex-col items-center justify-around gap-4 lg:col-span-1"
+              variants={itemFadeIn}
+            >
+              <BookOpen size={128} className="text-[#178a2d]" />
+              <Users size={128} className="text-[#178a2d]" />
+            </motion.div>
+          </motion.div>
+        </Section>
         {/* --- End of Why Choose Section --- */}
 
-               {/* --- Call to Action Section --- */}
+        {/* --- Call to Action Section --- */}
         <Section className="bg-gradient-to-r from-emerald-50 to-green-100">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                 {/* Text and Button ... */}
-                 <div className="text-center lg:text-left ">
-                    <h2 className="text-3xl xl:text-6xl text-[#178a2d] mb-4 ">
-                        Ready to simplify your <span className="font-bold underline">academic life?</span>
-                    </h2>
-                    <p className=" text-lg  xl:text-3xl text-gray-700 mb-6 xl:mt-15 xl:mb-10 ">
-                         Sign up now ! <br></br>
-                        it's free, fast, and made <br></br>
-                        for KU students.
-                    </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            
+            {/* MODIFIED: Wrapped CTA Column 1 (Text) in motion.div */}
+            <motion.div
+              className="text-center lg:text-left "
+              {...fadeInFromBottom}
+            >
+              <h2 className="text-3xl xl:text-6xl text-[#178a2d] mb-4 ">
+                Ready to simplify your <span className="font-bold underline">academic life?</span>
+              </h2>
+              <p className=" text-lg  xl:text-3xl text-gray-700 mb-6 xl:mt-15 xl:mb-10 ">
+                Sign up now ! <br></br>
+                it's free, fast, and made <br></br>
+                for KU students.
+              </p>
 
-                    {/* className="px-8 py-3 text-lg text-white font-semibold bg-gradient-to-b from-[#25a83e] to-[#1a8a2e] rounded-full shadow-lg hover:opacity-90 transition-opacity transform hover:scale-105 duration-300" */}
               <Link
-              to='/signup'
-className="px-8 py-3 text-lg text-white font-semibold bg-gradient-to-b from-[#25a83e] to-[#1a8a2e] rounded-full shadow-lg hover:opacity-90 transition-opacity transform hover:scale-105 duration-300"
+                to='/signup'
+                className="px-8 py-3 text-lg text-white font-semibold bg-gradient-to-b from-[#25a83e] to-[#1a8a2e] rounded-full shadow-lg hover:opacity-90 transition-opacity transform hover:scale-105 duration-300"
               >
                 Get Started
-                </Link>
-                 </div>
-                 {/* Network Graphic Placeholder ... */}
-                         <div className="w-full xl:ml-12">
-                {/* This div displays your hero image.
-                  - Using padding-top to create an aspect ratio is a good trick,
-                    but a fixed height on large screens is also fine.
-                  - h-64 sm:h-96 lg:h-[640px]: Sets responsive heights. Increased lg height.
-                  - rounded-2xl shadow-lg: For modern aesthetics.
-                */}
-                <div
-                  className="w-full h-[460px]  xl:h-[640px] bg-cover bg-center rounded-2xl"
-                  style={{
-                    backgroundImage:
-                      "url('https://design.penpot.app/assets/by-file-media-id/58522da1-b1ab-81bc-8006-95b857704d79')",
-                  }}
-                >
+              </Link>
+            </motion.div>
+
+            {/* MODIFIED: Wrapped CTA Column 2 (Image) in motion.div */}
+            <motion.div
+              className="w-full xl:ml-12"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: 'easeInOut' }} // Added delay
+              viewport={{ once: true }}
+            >
+              <div
+                className="w-full h-[460px]  xl:h-[640px] bg-cover bg-center rounded-2xl"
+                style={{
+                  backgroundImage:
+                    "url('/assets/connect-hero-img.png')",
+                }}
+              >
                   {/* Image is applied via background, no content needed here */}
                 </div>
-              </div>
-            </div>
+            </motion.div>
+          </div>
         </Section>
         {/* --- End of Call to Action Section --- */}
 
       </div>
-
-      
     </>
   );
 }
-
-
-
