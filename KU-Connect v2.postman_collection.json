@@ -1,0 +1,1903 @@
+{
+	"info": {
+		"_postman_id": "6969978c-c026-415d-90dc-7ff8d3f7209e",
+		"name": "KU-Connect v2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48393031",
+		"_collection_link": "https://debuggers-0914.postman.co/workspace/KU-Connect~a9a8aecc-6b78-442d-b547-2462b2d04d50/collection/48393031-6969978c-c026-415d-90dc-7ff8d3f7209e?action=share&source=collection_link&creator=48393031"
+	},
+	"item": [
+		{
+			"name": "Resource",
+			"item": [
+				{
+					"name": "upload",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "subject",
+									"value": "DBMS",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Data Models 4",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "test description",
+									"type": "text"
+								},
+								{
+									"key": "semester",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "video",
+									"type": "text"
+								},
+								{
+									"key": "url",
+									"value": "https:/youtube.com/video1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/resource",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"resource"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "upload-success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/home/ali/Documents/multivariable-calc.pdf"
+										},
+										{
+											"key": "url",
+											"value": "http://res.cloudinary.com/drwizlf0y/raw/upload/v1757851102/uedlkjy8dql0ar9fmjwm",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "course_id",
+											"value": "fe5ef858-34fb-4c11-8965-49e95d573c2d",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "Data Models in DBMS",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Comprehensive notes on advanced data models, covering hierarchical, network, relational, and entity-relationship models with real-world examples and diagrams. Useful for 4th-semester DBMS preparation.",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "doc",
+											"description": "allowedValues: [doc, video]",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/resource",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"resource"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Resource uploaded successfully\",\n    \"data\": {\n        \"id\": \"d092be6e-8313-4616-bdba-c5f6dc0f8bde\",\n        \"user_id\": \"0608ee9f-376c-4746-85e6-44e4fbd69313\",\n        \"type\": \"doc\",\n        \"title\": \"Data Models in DBMS\",\n        \"description\": \"Comprehensive notes on advanced data models, covering hierarchical, network, relational, and entity-relationship models with real-world examples and diagrams. Useful for 4th-semester DBMS preparation.\",\n        \"url\": \"https://cloudinary.com/req.file.path\",\n        \"course_id\": \"fe5ef858-34fb-4c11-8965-49e95d573c2d\",\n        \"created_at\": \"2025-09-22T13:41:47.541Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "subject",
+									"value": "DBMS",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Data Models 4",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "test description",
+									"type": "text"
+								},
+								{
+									"key": "semester",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "video",
+									"type": "text"
+								},
+								{
+									"key": "url",
+									"value": "https:/youtube.com/video1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/resource/f2f45603-75d2-4246-94e9-bb8532366e22",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"resource",
+								"f2f45603-75d2-4246-94e9-bb8532366e22"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "delete-success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/resource/:resourceId",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"resource",
+										":resourceId"
+									],
+									"variable": [
+										{
+											"key": "resourceId",
+											"value": "f2f45603-75d2-4246-94e9-bb8532366e22"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Resource deleted successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "retrieve",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": [
+						{
+							"name": "retrieve-success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/resource?course_id=fe5ef858-34fb-4c11-8965-49e95d573c2d&type=doc",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"resource"
+									],
+									"query": [
+										{
+											"key": "course_id",
+											"value": "fe5ef858-34fb-4c11-8965-49e95d573c2d"
+										},
+										{
+											"key": "type",
+											"value": "doc"
+										},
+										{
+											"key": "user",
+											"value": "c7f373a6-561e-4f5f-9bee-eedb2fd20490",
+											"description": "optional",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "577"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"241-TjsKp68zfOlmime25f33X3J0ZXw\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Sep 2025 18:44:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Resources fetched successfully\",\n    \"data\": [\n        {\n            \"id\": \"d092be6e-8313-4616-bdba-c5f6dc0f8bde\",\n            \"user_id\": \"0608ee9f-376c-4746-85e6-44e4fbd69313\",\n            \"type\": \"doc\",\n            \"title\": \"Data Models in DBMS\",\n            \"description\": \"Comprehensive notes on advanced data models, covering hierarchical, network, relational, and entity-relationship models with real-world examples and diagrams. Useful for 4th-semester DBMS preparation.\",\n            \"url\": \"https://cloudinary.com/req.file.path\",\n            \"course_id\": \"fe5ef858-34fb-4c11-8965-49e95d573c2d\",\n            \"created_at\": \"2025-09-22T13:41:47.541Z\",\n            \"user_name\": \"Ali\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/auth/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "register-success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Ali\",\n    \"email\": \"ali@example.com\",\n    \"phone\": \"03001224567\",\n    \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n    \"semester\": 1,\n    \"password\": \"test123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth/register",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"User registered successfully\",\n    \"data\": {\n        \"user\": {\n            \"id\": \"0608ee9f-376c-4746-85e6-44e4fbd69313\",\n            \"name\": \"Ali\",\n            \"email\": \"ali@example.com\",\n            \"phone\": \"03001224567\",\n            \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n            \"semester\": 1,\n            \"created_at\": \"2025-09-20T03:15:53.838Z\"\n        },\n        \"courses\": [\n            {\n                \"id\": \"760ff92f-3564-4823-bb5c-daeb5ef04322\",\n                \"code\": \"CS-101\",\n                \"title\": \"Introduction to Programming\",\n                \"description\": \"Fundamentals of programming using Python with emphasis on problem-solving and algorithms.\",\n                \"credits\": 3,\n                \"semester\": 1,\n                \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n                \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n                \"created_at\": \"2025-09-16T15:19:31.228Z\",\n                \"updated_at\": \"2025-09-16T15:19:31.228Z\"\n            },\n            {\n                \"id\": \"71b62833-3fca-4f40-a626-da0bd2ec4360\",\n                \"code\": \"CS-102\",\n                \"title\": \"Calculus I\",\n                \"description\": \"Differential and integral calculus covering limits, continuity, and applications.\",\n                \"credits\": 4,\n                \"semester\": 1,\n                \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n                \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n                \"created_at\": \"2025-09-16T15:19:31.228Z\",\n                \"updated_at\": \"2025-09-16T15:19:31.228Z\"\n            },\n            {\n                \"id\": \"81ed0dae-7ede-4797-90ea-7ae2d011fa0b\",\n                \"code\": \"CS-103\",\n                \"title\": \"Physics I\",\n                \"description\": \"Mechanics, motion, work, energy, and basic laws of physics with laboratory practice.\",\n                \"credits\": 3,\n                \"semester\": 1,\n                \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n                \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n                \"created_at\": \"2025-09-16T15:19:31.228Z\",\n                \"updated_at\": \"2025-09-16T15:19:31.228Z\"\n            },\n            {\n                \"id\": \"d90360cb-5c0e-4424-9113-98ab5fc2b800\",\n                \"code\": \"CS-104\",\n                \"title\": \"English Composition\",\n                \"description\": \"Academic writing, critical reading, and communication skills.\",\n                \"credits\": 2,\n                \"semester\": 1,\n                \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n                \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n                \"created_at\": \"2025-09-16T15:19:31.228Z\",\n                \"updated_at\": \"2025-09-16T15:19:31.228Z\"\n            },\n            {\n                \"id\": \"6a91cbfe-6ad0-40d6-866f-7e337d36171e\",\n                \"code\": \"CS-105\",\n                \"title\": \"World History\",\n                \"description\": \"Survey of major civilizations, cultural evolution, and global events.\",\n                \"credits\": 2,\n                \"semester\": 1,\n                \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n                \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n                \"created_at\": \"2025-09-16T15:19:31.228Z\",\n                \"updated_at\": \"2025-09-16T15:19:31.228Z\"\n            },\n            {\n                \"id\": \"fe5ef858-34fb-4c11-8965-49e95d573c2d\",\n                \"code\": \"CS-106\",\n                \"title\": \"Computer Fundamentals\",\n                \"description\": \"Introduction to computer hardware, software, operating systems, and basic tools.\",\n                \"credits\": 3,\n                \"semester\": 1,\n                \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n                \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n                \"created_at\": \"2025-09-16T15:19:31.228Z\",\n                \"updated_at\": \"2025-09-16T15:19:31.228Z\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "login-success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"ali@example.com\",\n    \"password\": \"test123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Login successful\",\n    \"data\": {\n        \"user\": {\n            \"id\": \"0608ee9f-376c-4746-85e6-44e4fbd69313\",\n            \"name\": \"Ali\",\n            \"email\": \"ali@example.com\",\n            \"role\": \"user\",\n            \"phone\": \"03001224567\",\n            \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n            \"semester\": 1,\n            \"created_at\": \"2025-09-20T03:15:53.838Z\"\n        },\n        \"courses\": [\n            {\n                \"id\": \"760ff92f-3564-4823-bb5c-daeb5ef04322\",\n                \"code\": \"CS-101\",\n                \"title\": \"Introduction to Programming\",\n                \"description\": \"Fundamentals of programming using Python with emphasis on problem-solving and algorithms.\",\n                \"credits\": 3,\n                \"semester\": 1,\n                \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n                \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n                \"created_at\": \"2025-09-16T15:19:31.228Z\",\n                \"updated_at\": \"2025-09-16T15:19:31.228Z\"\n            },\n            {\n                \"id\": \"71b62833-3fca-4f40-a626-da0bd2ec4360\",\n                \"code\": \"CS-102\",\n                \"title\": \"Calculus I\",\n                \"description\": \"Differential and integral calculus covering limits, continuity, and applications.\",\n                \"credits\": 4,\n                \"semester\": 1,\n                \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n                \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n                \"created_at\": \"2025-09-16T15:19:31.228Z\",\n                \"updated_at\": \"2025-09-16T15:19:31.228Z\"\n            },\n            {\n                \"id\": \"81ed0dae-7ede-4797-90ea-7ae2d011fa0b\",\n                \"code\": \"CS-103\",\n                \"title\": \"Physics I\",\n                \"description\": \"Mechanics, motion, work, energy, and basic laws of physics with laboratory practice.\",\n                \"credits\": 3,\n                \"semester\": 1,\n                \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n                \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n                \"created_at\": \"2025-09-16T15:19:31.228Z\",\n                \"updated_at\": \"2025-09-16T15:19:31.228Z\"\n            },\n            {\n                \"id\": \"d90360cb-5c0e-4424-9113-98ab5fc2b800\",\n                \"code\": \"CS-104\",\n                \"title\": \"English Composition\",\n                \"description\": \"Academic writing, critical reading, and communication skills.\",\n                \"credits\": 2,\n                \"semester\": 1,\n                \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n                \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n                \"created_at\": \"2025-09-16T15:19:31.228Z\",\n                \"updated_at\": \"2025-09-16T15:19:31.228Z\"\n            },\n            {\n                \"id\": \"6a91cbfe-6ad0-40d6-866f-7e337d36171e\",\n                \"code\": \"CS-105\",\n                \"title\": \"World History\",\n                \"description\": \"Survey of major civilizations, cultural evolution, and global events.\",\n                \"credits\": 2,\n                \"semester\": 1,\n                \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n                \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n                \"created_at\": \"2025-09-16T15:19:31.228Z\",\n                \"updated_at\": \"2025-09-16T15:19:31.228Z\"\n            },\n            {\n                \"id\": \"fe5ef858-34fb-4c11-8965-49e95d573c2d\",\n                \"code\": \"CS-106\",\n                \"title\": \"Computer Fundamentals\",\n                \"description\": \"Introduction to computer hardware, software, operating systems, and basic tools.\",\n                \"credits\": 3,\n                \"semester\": 1,\n                \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n                \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n                \"created_at\": \"2025-09-16T15:19:31.228Z\",\n                \"updated_at\": \"2025-09-16T15:19:31.228Z\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "verify",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": [
+						{
+							"name": "verify-success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/auth/verify",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"verify"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"User verified\",\n    \"data\": {\n        \"user\": {\n            \"id\": \"0608ee9f-376c-4746-85e6-44e4fbd69313\",\n            \"name\": \"Ali\",\n            \"email\": \"ali@example.com\",\n            \"phone\": \"03001224567\",\n            \"role\": \"moderator\",\n            \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n            \"semester\": 1,\n            \"created_at\": \"2025-09-20T03:15:53.838Z\"\n        },\n        \"courses\": [\n            {\n                \"id\": \"760ff92f-3564-4823-bb5c-daeb5ef04322\",\n                \"code\": \"CS-101\",\n                \"title\": \"Introduction to Programming\",\n                \"description\": \"Fundamentals of programming using Python with emphasis on problem-solving and algorithms.\",\n                \"credits\": 3,\n                \"semester\": 1,\n                \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n                \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n                \"created_at\": \"2025-09-16T15:19:31.228Z\",\n                \"updated_at\": \"2025-09-16T15:19:31.228Z\"\n            },\n            {\n                \"id\": \"71b62833-3fca-4f40-a626-da0bd2ec4360\",\n                \"code\": \"CS-102\",\n                \"title\": \"Calculus I\",\n                \"description\": \"Differential and integral calculus covering limits, continuity, and applications.\",\n                \"credits\": 4,\n                \"semester\": 1,\n                \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n                \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n                \"created_at\": \"2025-09-16T15:19:31.228Z\",\n                \"updated_at\": \"2025-09-16T15:19:31.228Z\"\n            },\n            {\n                \"id\": \"81ed0dae-7ede-4797-90ea-7ae2d011fa0b\",\n                \"code\": \"CS-103\",\n                \"title\": \"Physics I\",\n                \"description\": \"Mechanics, motion, work, energy, and basic laws of physics with laboratory practice.\",\n                \"credits\": 3,\n                \"semester\": 1,\n                \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n                \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n                \"created_at\": \"2025-09-16T15:19:31.228Z\",\n                \"updated_at\": \"2025-09-16T15:19:31.228Z\"\n            },\n            {\n                \"id\": \"6a91cbfe-6ad0-40d6-866f-7e337d36171e\",\n                \"code\": \"CS-105\",\n                \"title\": \"World History\",\n                \"description\": \"Survey of major civilizations, cultural evolution, and global events.\",\n                \"credits\": 2,\n                \"semester\": 1,\n                \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n                \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n                \"created_at\": \"2025-09-16T15:19:31.228Z\",\n                \"updated_at\": \"2025-09-16T15:19:31.228Z\"\n            },\n            {\n                \"id\": \"fe5ef858-34fb-4c11-8965-49e95d573c2d\",\n                \"code\": \"CS-106\",\n                \"title\": \"Computer Fundamentals\",\n                \"description\": \"Introduction to computer hardware, software, operating systems, and basic tools.\",\n                \"credits\": 3,\n                \"semester\": 1,\n                \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n                \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n                \"created_at\": \"2025-09-16T15:19:31.228Z\",\n                \"updated_at\": \"2025-09-16T15:19:31.228Z\"\n            },\n            {\n                \"id\": \"d90360cb-5c0e-4424-9113-98ab5fc2b800\",\n                \"code\": \"CS-104\",\n                \"title\": \"Functional English\",\n                \"description\": \"This course focuses on developing students' ability to communicate effectively in English, including reading, writing, listening, and speaking skills.\",\n                \"credits\": 3,\n                \"semester\": 1,\n                \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n                \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n                \"created_at\": \"2025-09-16T15:19:31.228Z\",\n                \"updated_at\": \"2025-09-16T15:19:31.228Z\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/auth/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "logout-success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/auth/logout",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Logged out\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Catalog",
+			"item": [
+				{
+					"name": "departments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/catalog/departments",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"catalog",
+								"departments"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "departments-sucess",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/catalog/departments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"catalog",
+										"departments"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "796"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"31c-1EmMyuOS861OQE4JkOJO+syeEFc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 20 Sep 2025 09:17:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Departments fetched successfully\",\n    \"data\": [\n        {\n            \"id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n            \"code\": \"DCS\\t\",\n            \"name\": \"Department of Computer Science\",\n            \"description\": \"The Department of Computer Science, commonly known as UBIT (University of Karachi, UBIT), is one of the leading centers for computer science and information technology education in Pakistan. Established in 2002, it offers undergraduate, graduate, and doctoral programs in areas such as software engineering, artificial intelligence, data science, cybersecurity, and networking. Equipped with modern labs, research facilities, and experienced faculty, UBIT plays a vital role in producing skilled IT professionals and fostering innovation in Pakistan’s tech industry.\",\n            \"created_at\": \"2025-09-16T15:08:34.939Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "programs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": [
+						{
+							"name": "programs-success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/catalog/programs",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"catalog",
+										"programs"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "832"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"340-1mtGZ5fWdHL9j+Fcb6FWHdZiMFI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 20 Sep 2025 09:20:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Programs fetched successfully\",\n    \"data\": [\n        {\n            \"id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n            \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n            \"code\": \"BSCS\",\n            \"name\": \"Bachelor of Science in Computer Science\",\n            \"level\": \"Bachelor's\",\n            \"duration\": 4,\n            \"description\": \"The BSCS (Bachelor of Science in Computer Science) program is a four-year undergraduate degree designed to provide students with a strong foundation in computing, programming, algorithms, software development, databases, networks, and emerging technologies like artificial intelligence and data science. It combines theory with practical skills, preparing graduates for careers in software engineering, IT, research, and entrepreneurship, as well as for advanced studies in computer science and related fields.\",\n            \"created_at\": \"2025-09-16T15:10:52.492Z\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "programs-by-id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/catalog/programs/:departmentId",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"catalog",
+										"programs",
+										":departmentId"
+									],
+									"variable": [
+										{
+											"key": "departmentId",
+											"value": "4084916e-1d44-4bf2-ba11-1a10264e064b"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "847"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34f-z8AubrcHUXU2jpgM3jShopwp47Y\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 20 Sep 2025 09:22:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Programs for department fetched successfully\",\n    \"data\": [\n        {\n            \"id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n            \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n            \"code\": \"BSCS\",\n            \"name\": \"Bachelor of Science in Computer Science\",\n            \"level\": \"Bachelor's\",\n            \"duration\": 4,\n            \"description\": \"The BSCS (Bachelor of Science in Computer Science) program is a four-year undergraduate degree designed to provide students with a strong foundation in computing, programming, algorithms, software development, databases, networks, and emerging technologies like artificial intelligence and data science. It combines theory with practical skills, preparing graduates for careers in software engineering, IT, research, and entrepreneurship, as well as for advanced studies in computer science and related fields.\",\n            \"created_at\": \"2025-09-16T15:10:52.492Z\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Community",
+			"item": [
+				{
+					"name": "post",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": [
+								{
+									"name": "create-success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"content\": \"abcd\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/community/post",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"community",
+												"post"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "Content-Length",
+											"value": "253"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"fd-SlDCtpst8QWNlKLnceNz6+5ZQJo\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 20 Sep 2025 10:00:26 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Post created successfully\",\n    \"data\": {\n        \"id\": \"6d852007-868b-4c26-8ac6-c41afd275410\",\n        \"user_id\": \"0608ee9f-376c-4746-85e6-44e4fbd69313\",\n        \"content\": \"abcd\",\n        \"created_at\": \"2025-09-20T05:00:26.539Z\",\n        \"updated_at\": \"2025-09-20T05:00:26.539Z\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "get",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": [
+								{
+									"name": "get-paginated",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/community/post?page=1&limit=10&filter=oldest",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"community",
+												"post"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1"
+												},
+												{
+													"key": "limit",
+													"value": "10"
+												},
+												{
+													"key": "filter",
+													"value": "oldest",
+													"description": "values: [ oldest, newest, top ]"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "802"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"322-NRNgnHvXSNLjHsRVab97s7o95oU\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 20 Sep 2025 19:06:37 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Posts fetched successfully\",\n    \"data\": {\n        \"posts\": [\n            {\n                \"id\": \"02d040b9-6ebc-493a-8a91-17c0af104538\",\n                \"user_id\": \"0608ee9f-376c-4746-85e6-44e4fbd69313\",\n                \"content\": \"abcd\",\n                \"created_at\": \"2025-09-20T04:59:15.343Z\",\n                \"updated_at\": \"2025-09-20T04:59:15.343Z\",\n                \"user\": {\n                    \"name\": \"Ali\",\n                    \"program\": \"Bachelor of Science in Computer Science\",\n                    \"semester\": 1,\n                    \"department\": \"Department of Computer Science\"\n                },\n                \"comments\": [],\n                \"score\": 0\n            },\n            {\n                \"id\": \"6d852007-868b-4c26-8ac6-c41afd275410\",\n                \"user_id\": \"0608ee9f-376c-4746-85e6-44e4fbd69313\",\n                \"content\": \"abcd\",\n                \"created_at\": \"2025-09-20T05:00:26.539Z\",\n                \"updated_at\": \"2025-09-20T05:00:26.539Z\",\n                \"user\": {\n                    \"name\": \"Ali\",\n                    \"program\": \"Bachelor of Science in Computer Science\",\n                    \"semester\": 1,\n                    \"department\": \"Department of Computer Science\"\n                },\n                \"comments\": [],\n                \"score\": 0\n            }\n        ],\n        \"page\": 1,\n        \"limit\": 10,\n        \"total\": 2\n    }\n}"
+								},
+								{
+									"name": "get-by-id",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/community/post/:postId",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"community",
+												"post",
+												":postId"
+											],
+											"variable": [
+												{
+													"key": "postId",
+													"value": "02d040b9-6ebc-493a-8a91-17c0af104538"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "Content-Length",
+											"value": "400"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"190-zBmhKlE/3Y2jb8BkfCh7FmhFNoc\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 20 Sep 2025 18:51:42 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Post fetched successfully\",\n    \"data\": {\n        \"id\": \"02d040b9-6ebc-493a-8a91-17c0af104538\",\n        \"user_id\": \"0608ee9f-376c-4746-85e6-44e4fbd69313\",\n        \"content\": \"abcd\",\n        \"created_at\": \"2025-09-20T04:59:15.343Z\",\n        \"updated_at\": \"2025-09-20T04:59:15.343Z\",\n        \"user\": {\n            \"name\": \"Ali\",\n            \"program\": \"Bachelor of Science in Computer Science\",\n            \"semester\": 1,\n            \"department\": \"Department of Computer Science\"\n        },\n        \"comments\": []\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/community/post/:postId",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"community",
+										"post",
+										":postId"
+									],
+									"variable": [
+										{
+											"key": "postId",
+											"value": "02d040b9-6ebc-493a-8a91-17c0af104538"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "delete-success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/community/post/:postId",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"community",
+												"post",
+												":postId"
+											],
+											"variable": [
+												{
+													"key": "postId",
+													"value": "02d040b9-6ebc-493a-8a91-17c0af104538"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "253"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"fd-6KaKqnFDS9+Slv+UThhlRO3rmKU\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 20 Sep 2025 19:11:27 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Post deleted successfully\",\n    \"data\": {\n        \"id\": \"02d040b9-6ebc-493a-8a91-17c0af104538\",\n        \"user_id\": \"0608ee9f-376c-4746-85e6-44e4fbd69313\",\n        \"content\": \"abcd\",\n        \"created_at\": \"2025-09-20T04:59:15.343Z\",\n        \"updated_at\": \"2025-09-20T04:59:15.343Z\"\n    }\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "comment",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"post_id\":\"6d852007-868b-4c26-8ac6-c41afd275410\",\n    \"content\":\"great insights\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/community/comment",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"community",
+										"comment"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "create-success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"post_id\":\"6d852007-868b-4c26-8ac6-c41afd275410\",\n    \"content\":\"test post\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/community/comment",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"community",
+												"comment"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "Content-Length",
+											"value": "270"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"10e-+hPSa5C077oLGHejoxyFpCNJhnw\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 20 Sep 2025 19:35:13 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Comment created successfully\",\n    \"data\": {\n        \"id\": \"d948e704-cc2a-405e-939d-d34dd1017af3\",\n        \"post_id\": \"6d852007-868b-4c26-8ac6-c41afd275410\",\n        \"user_id\": \"0608ee9f-376c-4746-85e6-44e4fbd69313\",\n        \"content\": \"test post\",\n        \"created_at\": \"2025-09-20T14:35:12.710Z\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "get",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/community/comments/:post_id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"community",
+										"comments",
+										":post_id"
+									],
+									"variable": [
+										{
+											"key": "post_id",
+											"value": "6d852007-868b-4c26-8ac6-c41afd275410"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "get-success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/community/comments/:post_id",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"community",
+												"comments",
+												":post_id"
+											],
+											"variable": [
+												{
+													"key": "post_id",
+													"value": "6d852007-868b-4c26-8ac6-c41afd275410"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "516"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"204-TZ0L4S0AdRB7vlOCtCP3L5hZ0PQ\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 20 Sep 2025 19:48:47 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Comments fetched successfully\",\n    \"data\": [\n        {\n            \"id\": \"d948e704-cc2a-405e-939d-d34dd1017af3\",\n            \"post_id\": \"6d852007-868b-4c26-8ac6-c41afd275410\",\n            \"user_id\": \"0608ee9f-376c-4746-85e6-44e4fbd69313\",\n            \"content\": \"congratulations\",\n            \"created_at\": \"2025-09-20T14:35:12.710Z\",\n            \"name\": \"Ali\"\n        },\n        {\n            \"id\": \"cc13b580-1703-444e-b60a-168af32d987a\",\n            \"post_id\": \"6d852007-868b-4c26-8ac6-c41afd275410\",\n            \"user_id\": \"0608ee9f-376c-4746-85e6-44e4fbd69313\",\n            \"content\": \"great insights\",\n            \"created_at\": \"2025-09-20T14:43:34.207Z\",\n            \"name\": \"Ali\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": [
+								{
+									"name": "delete-success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/community/comment/:comment_id",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"community",
+												"comment",
+												":comment_id"
+											],
+											"variable": [
+												{
+													"key": "comment_id",
+													"value": "d948e704-cc2a-405e-939d-d34dd1017af3"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "Content-Length",
+											"value": "276"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"114-FDnFklak+Q00VclyCMlnhACvf4c\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 20 Sep 2025 19:52:26 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Comment deleted successfully\",\n    \"data\": {\n        \"id\": \"d948e704-cc2a-405e-939d-d34dd1017af3\",\n        \"post_id\": \"6d852007-868b-4c26-8ac6-c41afd275410\",\n        \"user_id\": \"0608ee9f-376c-4746-85e6-44e4fbd69313\",\n        \"content\": \"congratulations\",\n        \"created_at\": \"2025-09-20T14:35:12.710Z\"\n    }\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "vote",
+					"item": [
+						{
+							"name": "cast",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"post_id\": \"6d852007-868b-4c26-8ac6-c41afd275410\",\n    \"value\": -1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/community/vote",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"community",
+										"vote"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "cast-success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"post_id\": \"6d852007-868b-4c26-8ac6-c41afd275410\",\n    \"value\": -1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/community/vote",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"community",
+												"vote"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "256"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"100-JcA2TtPKemyprLe0mq43rGmkcWg\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 20 Sep 2025 20:06:20 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Vote created successfully\",\n    \"data\": {\n        \"id\": \"d684edac-912d-4157-a31c-d595b620c4b6\",\n        \"post_id\": \"6d852007-868b-4c26-8ac6-c41afd275410\",\n        \"user_id\": \"0608ee9f-376c-4746-85e6-44e4fbd69313\",\n        \"value\": -1,\n        \"created_at\": \"2025-09-20T15:06:20.230Z\"\n    }\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "course upsert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/catalog/courses",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"catalog",
+								"courses"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"d90360cb-5c0e-4424-9113-98ab5fc2b800\",\n    \"code\": \"CS-104\",\n    \"title\": \"Functional English\",\n    \"description\": \"This course focuses on developing students' ability to communicate effectively in English, including reading, writing, listening, and speaking skills.\",\n    \"credits\": \"3\",\n    \"semester\": \"1\",\n    \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n    \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/catalog/courses",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"catalog",
+										"courses"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "520"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"208-hdowQdJ2DTmF6Q8WxvNLTP+WP5w\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Sep 2025 15:40:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Course updated\",\n    \"data\": {\n        \"id\": \"d90360cb-5c0e-4424-9113-98ab5fc2b800\",\n        \"code\": \"CS-104\",\n        \"title\": \"Functional English\",\n        \"description\": \"This course focuses on developing students' ability to communicate effectively in English, including reading, writing, listening, and speaking skills.\",\n        \"credits\": 3,\n        \"semester\": 1,\n        \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n        \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n        \"created_at\": \"2025-09-16T15:19:31.228Z\",\n        \"updated_at\": \"2025-09-16T15:19:31.228Z\"\n    }\n}"
+						},
+						{
+							"name": "create",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"code\": \"CS-304\",\n    \"title\": \"Functional English\",\n    \"description\": \"This course focuses on developing students' ability to communicate effectively in English, including reading, writing, listening, and speaking skills.\",\n    \"credits\": \"3\",\n    \"semester\": \"1\",\n    \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n    \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/catalog/courses",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"catalog",
+										"courses"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Course added\",\n    \"data\": {\n        \"id\": \"9ca577d1-1d48-48f0-a170-ca801e412fdb\",\n        \"code\": \"CS-304\",\n        \"title\": \"Functional English\",\n        \"description\": \"This course focuses on developing students' ability to communicate effectively in English, including reading, writing, listening, and speaking skills.\",\n        \"credits\": 3,\n        \"semester\": 1,\n        \"program_id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n        \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n        \"created_at\": \"2025-09-22T10:48:38.880Z\",\n        \"updated_at\": \"2025-09-22T10:48:38.880Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "program upsert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/catalog/program",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"catalog",
+								"program"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n    \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n    \"code\": \"BSCS\",\n    \"name\": \"Bachelor of Science in Computer Science\",\n    \"level\": \"Bachelor's\",\n    \"duration\": \"4\",\n    \"description\": \"The BSSE (Bachelor of Science in Computer Science) program is a four-year undergraduate degree designed to provide students with a strong foundation in computing, programming, algorithms, software development, databases, networks, and emerging technologies like artificial intelligence and data science. It combines theory with practical skills, preparing graduates for careers in software engineering, IT, research, and entrepreneurship, as well as for advanced studies in computer science and related fields.\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/catalog/programs",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"catalog",
+										"programs"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Program updated\",\n    \"data\": {\n        \"id\": \"c5009089-c88c-4567-8e3e-84c4c1af8488\",\n        \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n        \"code\": \"BSCS\",\n        \"name\": \"Bachelor of Science in Computer Science\",\n        \"level\": \"Bachelor's\",\n        \"duration\": 4,\n        \"description\": \"The BSSE (Bachelor of Science in Computer Science) program is a four-year undergraduate degree designed to provide students with a strong foundation in computing, programming, algorithms, software development, databases, networks, and emerging technologies like artificial intelligence and data science. It combines theory with practical skills, preparing graduates for careers in software engineering, IT, research, and entrepreneurship, as well as for advanced studies in computer science and related fields.\",\n        \"created_at\": \"2025-09-16T15:10:52.492Z\"\n    }\n}"
+						},
+						{
+							"name": "create",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n    \"code\": \"BSSE\",\n    \"name\": \"Bachelor of Science in Software Engineering \",\n    \"level\": \"Bachelor's\",\n    \"duration\": \"4\",\n    \"description\": \"The BSSE (Bachelor of Science in Software Engineering) program is a four-year undergraduate degree designed to provide students with a strong foundation in computing, programming, algorithms, software development, databases, networks, and emerging technologies like artificial intelligence and data science. It combines theory with practical skills, preparing graduates for careers in software engineering, IT, research, and entrepreneurship, as well as for advanced studies in computer science and related fields.\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/catalog/programs",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"catalog",
+										"programs"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "823"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"337-n/NLJlcvJNE5udTyAUGvQI1AW6g\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 22 Sep 2025 16:04:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Program added\",\n    \"data\": {\n        \"id\": \"d9221bfd-da88-4330-ae91-f1e01066411c\",\n        \"department_id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n        \"code\": \"BSSE\",\n        \"name\": \"Bachelor of Science in Software Engineering \",\n        \"level\": \"Bachelor's\",\n        \"duration\": 4,\n        \"description\": \"The BSSE (Bachelor of Science in Software Engineering) program is a four-year undergraduate degree designed to provide students with a strong foundation in computing, programming, algorithms, software development, databases, networks, and emerging technologies like artificial intelligence and data science. It combines theory with practical skills, preparing graduates for careers in software engineering, IT, research, and entrepreneurship, as well as for advanced studies in computer science and related fields.\",\n        \"created_at\": \"2025-09-22T11:04:02.562Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "department upsert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/catalog/departments",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"catalog",
+								"departments"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n    \"code\": \"DCS\",\n    \"name\": \"Department of Computer Science\",\n    \"description\": \"The Department of Computer Science, commonly known as UBIT (University of Karachi, UBIT), is one of the leading centers for computer science and information technology education in Pakistan. Established in 2002, it offers undergraduate, graduate, and doctoral programs in areas such as software engineering, artificial intelligence, data science, cybersecurity, and networking. Equipped with modern labs, research facilities, and experienced faculty, UBIT plays a vital role in producing skilled IT professionals and fostering innovation in Pakistan’s tech industry.\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/catalog/departments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"catalog",
+										"departments"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Department updated\",\n    \"data\": {\n        \"id\": \"4084916e-1d44-4bf2-ba11-1a10264e064b\",\n        \"code\": \"DCS\",\n        \"name\": \"Department of Computer Science\",\n        \"description\": \"The Department of Computer Science, commonly known as UBIT (University of Karachi, UBIT), is one of the leading centers for computer science and information technology education in Pakistan. Established in 2002, it offers undergraduate, graduate, and doctoral programs in areas such as software engineering, artificial intelligence, data science, cybersecurity, and networking. Equipped with modern labs, research facilities, and experienced faculty, UBIT plays a vital role in producing skilled IT professionals and fostering innovation in Pakistan’s tech industry.\",\n        \"created_at\": \"2025-09-16T15:08:34.939Z\"\n    }\n}"
+						},
+						{
+							"name": "create",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"code\": \"DCP\",\n    \"name\": \"Department of Pharmacy\",\n    \"description\": \"The Department of Pharmacy & Pharmaceutical Sciences at the University of Karachi owes its origin to the Department of Pharmacy, which was established in 1964. The Department of Pharmacy was founded in response to the need of better drug delivery system in hospitals and retail pharmacy, and also to cater the ever growing need of pharmaceutical industries because 90 percent of the drug based industry in Pakistan, both national and multi-national, is located at Karachi. The Department of Pharmacy was raised as the first full-fledged Faculty of Pharmacy in the country. The faculty comprises five teaching and research departments viz. Pharmaceutics, Pharmaceutical Chemistry, Pharmacognosy, Pharmacology and Pharmacy Practice. More than 2000 regular students are today pursuing their studies leading to the award of Pharm. D., M. Phil. and Ph.D degrees.Apart from these departments the faculty also has a Research Institute of Pharmaceutical Sciences in which research on different aspects of drugs is conducted.\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/catalog/departments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"catalog",
+										"departments"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Department added\",\n    \"data\": {\n        \"id\": \"f7470044-9f1a-403d-a9e0-651cb6cf5911\",\n        \"code\": \"DCP\",\n        \"name\": \"Department of Pharmacy\",\n        \"description\": \"The Department of Pharmacy & Pharmaceutical Sciences at the University of Karachi owes its origin to the Department of Pharmacy, which was established in 1964. The Department of Pharmacy was founded in response to the need of better drug delivery system in hospitals and retail pharmacy, and also to cater the ever growing need of pharmaceutical industries because 90 percent of the drug based industry in Pakistan, both national and multi-national, is located at Karachi. The Department of Pharmacy was raised as the first full-fledged Faculty of Pharmacy in the country. The faculty comprises five teaching and research departments viz. Pharmaceutics, Pharmaceutical Chemistry, Pharmacognosy, Pharmacology and Pharmacy Practice. More than 2000 regular students are today pursuing their studies leading to the award of Pharm. D., M. Phil. and Ph.D degrees.Apart from these departments the faculty also has a Research Institute of Pharmaceutical Sciences in which research on different aspects of drugs is conducted.\",\n        \"created_at\": \"2025-09-22T11:19:00.211Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "role",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"0608ee9f-376c-4746-85e6-44e4fbd69313\",\n    \"newRole\": \"moderator\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/change-role",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"change-role"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": \"0608ee9f-376c-4746-85e6-44e4fbd69313\",\n    \"newRole\": \"moderator\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth/change-role",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"change-role"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"User role updated\",\n    \"data\": {\n        \"id\": \"0608ee9f-376c-4746-85e6-44e4fbd69313\",\n        \"name\": \"Ali\",\n        \"email\": \"ali@example.com\",\n        \"role\": \"moderator\"\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
