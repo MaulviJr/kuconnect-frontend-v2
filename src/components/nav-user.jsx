@@ -43,6 +43,15 @@ export function NavUser() {
 
   if (loading) return <Loader />;
 
+  // --- THIS IS THE FIX ---
+  // Add this check right here. If there is no user,
+  // the component will stop and render nothing,
+  // preventing the crash.
+ if (!user) {
+  return null; // Or <Loader />, or a <LoginButton />
+ }
+  // --- END OF FIX ---
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>

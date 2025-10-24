@@ -121,7 +121,7 @@ function App() {
           element={
             <ProtectedRoute>
               <AskSeniorsPage />
-            </ProtectedRoute>
+             </ProtectedRoute>
           }
         />
         <Route
