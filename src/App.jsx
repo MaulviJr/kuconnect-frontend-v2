@@ -127,17 +127,17 @@ function App() {
         <Route
           path="/gpa-calculator"
           element={
-            <ProtectedRoute>
+            // <ProtectedRoute>
               <SemesterView />
-            </ProtectedRoute>
+            // </ProtectedRoute>
           }
         />
         <Route
           path="/gpa-calculator/:semesterIndex"
           element={
-            <ProtectedRoute>
+            // <ProtectedRoute>
               <CourseView />
-            </ProtectedRoute>
+            // </ProtectedRoute>
           }
         />
       </Routes>
