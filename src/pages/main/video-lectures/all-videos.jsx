@@ -12,8 +12,9 @@ import AppLayout from "@/components/layout";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Play, Video } from "lucide-react";
-import ReactPlayer from 'react-player';
-import React from 'react'
+import { FaCirclePlay } from "react-icons/fa6";
+
+import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
@@ -48,7 +49,7 @@ export default function VideoLecturesPage() {
     if (searchTerm.trim() === "") {
       setFilteredVideos(videos);
     } else {
-      const filtered = videos.filter(video =>
+      const filtered = videos.filter((video) =>
         video.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setFilteredVideos(filtered);
@@ -74,17 +75,18 @@ export default function VideoLecturesPage() {
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold text-primary">Video Lectures</h1>
           <Button
-            className="bg-blue-600 hover:bg-blue-700"
-            onClick={handleUpload}>
+            className=" cursor-pointer bg-primary hover:primary/80"
+            onClick={handleUpload}
+          >
             Upload Video
           </Button>
         </div>
 
         {/* Search + Filters */}
         <div className="flex flex-col md:flex-row items-center gap-4 mt-8">
-          <Input 
-            placeholder="Search video lectures" 
-            className="flex-1" 
+          <Input
+            placeholder="Search video lectures"
+            className="flex-1"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -116,51 +118,38 @@ export default function VideoLecturesPage() {
         </div>
 
         {/* Videos Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 gap-6 mt-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mt-10">
           {filteredVideos.map((video) => (
-            <Card key={video.id} className="flex flex-col  gap-2 border-2 p-2 min-w-65  max-w-90 border-primary ">
+            <Card
+              key={video.id}
+              className="flex flex-col  gap-2 border-2 p-2  max-w-90 border-primary "
+            >
               <CardContent className=" flex w-full p-0 m-0">
-                <div className="w-full bg-primary aspect-video rounded-md relative">
-                  <ReactPlayer
-                    url={video.url || "https://www.youtube.com/watch?v=dQw4w9WgXcQ"}
-                    light={true}
-                    controls={true}
-                    width="100%"
-                    height="100%"
-                    style={{ position: 'absolute', top: 0, left: 0 }}
-                    config={{
-                      youtube: {
-                        playerVars: {
-                          showinfo: 1,
-                          rel: 0,
-                          modestbranding: 1,
-                        }
-                      }
-                    }}
-                  />
+                <div className="w-full flex justify-center items-center bg-secondary  aspect-video rounded-md relative">
+                  < FaCirclePlay className='w-8 h-8 text-primary'/> 
+
                 </div>
               </CardContent>
               {/* Footer Actions */}
-              <CardFooter
-                className="p-0">
-                  <div className="flex-col w-full ">
-                <div className="flex px-2 flex-col text-left w-full overflow-hidden">
-                    <span className="font-semibold w-full max-w-[90ch]">{video.title}</span>                    
+              <CardFooter className="p-0">
+                <div className="flex-col w-full ">
+                  <div className="flex px-2 flex-col text-left w-full overflow-hidden">
+                    <span className="font-semibold w-full max-w-[90ch]">
+                      {video.title}
+                    </span>
                     <span className="text-xs w-full text-muted-foreground">
                       {video.user_name}
                     </span>
                   </div>
-                  
+
                   <Button
                     size="sm"
                     className="bg-primary mt-2 hover:contrast-90 cursor-pointer w-full"
-                    onClick={() => window.open(video.url, "_blank")}>
+                    onClick={() => window.open(video.url, "_blank")}
+                  >
                     Watch
                   </Button>
-
-                  </div>
-
-                
+                </div>
               </CardFooter>
             </Card>
           ))}

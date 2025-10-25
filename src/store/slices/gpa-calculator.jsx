@@ -1,47 +1,93 @@
-const createGpaCalculatorSlice = (set, get) => ({
-  gpaCalculator: {
-    cgpa: 0,
-    semesters: [], // [{ semesterName, courses: [], numberOfCourses, totalCredits }]
-  },
+const LOCAL_KEY = "gpaCalculator";
 
-  setCGPA: (cgpa) =>
-    set((state) => ({
-      gpaCalculator: {
-        ...state.gpaCalculator,
-        cgpa,
-      },
-    })),
+const createGpaCalculatorSlice = (set, get) => {
+  // Load initial state from localStorage when available
+  let initial = { cgpa: "0.00", semesters: [] };
+  try {
+    const raw = localStorage.getItem(LOCAL_KEY);
+    if (raw) {
+      initial = JSON.parse(raw);
+    }
+  } catch (err) {
+    // ignore JSON errors and keep defaults
+    // console.error("Failed to read gpaCalculator from localStorage:", err);
+  }
 
-  addSemester: (semester) =>
-    set((state) => ({
-      gpaCalculator: {
-        ...state.gpaCalculator,
-        semesters: [
-          ...state.gpaCalculator.semesters,
-          { ...semester, courses: [], numberOfCourses: 0, totalCredits: 0 },
-        ],
-      },
-    })),
+  const persist = (next) => {
+    try {
+      localStorage.setItem(LOCAL_KEY, JSON.stringify(next));
+    } catch (err) {
+      console.error("Failed to persist gpaCalculator:", err);
+    }
+  };
 
-  addCourseToSemester: (semesterIndex, course) =>
-    set((state) => {
-      const semesters = [...state.gpaCalculator.semesters];
-      const sem = semesters[semesterIndex];
+  return {
+    gpaCalculator: initial,
 
-      semesters[semesterIndex] = {
-        ...sem,
-        courses: [...sem.courses, course],
-        numberOfCourses: sem.numberOfCourses + 1,
-        totalCredits: sem.totalCredits + course.credits,
-      };
+    setCGPA: (cgpa) =>
+      set((state) => {
+        const next = { ...state.gpaCalculator, cgpa };
+        persist(next);
+        return { gpaCalculator: next };
+      }),
 
-      return {
-        gpaCalculator: {
+    addSemester: (semester) =>
+      set((state) => {
+        const next = {
           ...state.gpaCalculator,
-          semesters,
-        },
-      };
-    }),
-});
+          semesters: [
+            ...state.gpaCalculator.semesters,
+            { ...semester, courses: [], numberOfCourses: 0, totalCredits: 0 },
+          ],
+        };
+        persist(next);
+        return { gpaCalculator: next };
+      }),
+
+    addCourseToSemester: (semesterIndex, course) =>
+      set((state) => {
+        const semesters = [...state.gpaCalculator.semesters];
+        const sem = semesters[semesterIndex];
+
+        semesters[semesterIndex] = {
+          ...sem,
+          courses: [...sem.courses, course],
+          numberOfCourses: sem.numberOfCourses + 1,
+          totalCredits: sem.totalCredits + course.credits,
+        };
+
+        const next = { ...state.gpaCalculator, semesters };
+        persist(next);
+        return { gpaCalculator: next };
+      }),
+
+    updateCourseInSemester: (semesterIndex, courseIndex, updatedCourse) =>
+      set((state) => {
+        const semesters = [...state.gpaCalculator.semesters];
+        const sem = semesters[semesterIndex];
+        const courses = [...sem.courses];
+        // Update totalCredits
+        const prevCredits = courses[courseIndex]?.credits || 0;
+        courses[courseIndex] = updatedCourse;
+        semesters[semesterIndex] = {
+          ...sem,
+          courses,
+          totalCredits: sem.totalCredits - prevCredits + updatedCourse.credits,
+        };
+        const next = { ...state.gpaCalculator, semesters };
+        persist(next);
+        return { gpaCalculator: next };
+      }),
+
+    removeSemester: (semesterIndex) =>
+      set((state) => {
+        const semesters = [...state.gpaCalculator.semesters];
+        semesters.splice(semesterIndex, 1);
+        const next = { ...state.gpaCalculator, semesters };
+        persist(next);
+        return { gpaCalculator: next };
+      }),
+  };
+};
 
 export default createGpaCalculatorSlice;

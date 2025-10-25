@@ -42,7 +42,9 @@ export default function UploadResourceForm({ resourceType = "doc" }) {
   const [files, setFiles] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [uploadMethod, setUploadMethod] = useState("file"); // "file" or "url"
+  const [uploadMethod, setUploadMethod] = useState(
+    resourceType === "video" ? "url" : "file"
+  ); // "file" or "url"
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -69,7 +71,7 @@ export default function UploadResourceForm({ resourceType = "doc" }) {
     setLoading(true);
     try {
       const formData = new FormData();
-      
+
       // Add required fields
       formData.append("title", values.title);
       formData.append("description", values.description);
@@ -85,7 +87,7 @@ export default function UploadResourceForm({ resourceType = "doc" }) {
 
       // Use unified resource API
       const res = await uploadResource(formData);
-        
+
       if (res?.success) {
         // Navigate back to the appropriate page
         if (resourceType === "doc") {
@@ -125,24 +127,47 @@ export default function UploadResourceForm({ resourceType = "doc" }) {
               <div className="space-y-2">
                 <FormLabel>Upload Method</FormLabel>
                 <div className="flex gap-6">
-                  <label className="flex gap-2 items-center">
-                    <input
-                      type="radio"
-                      value="file"
-                      checked={uploadMethod === "file"}
-                      onChange={() => setUploadMethod("file")}
-                    />
-                    <span>Upload File</span>
-                  </label>
-                  <label className="flex gap-2 items-center">
-                    <input
-                      type="radio"
-                      value="url"
-                      checked={uploadMethod === "url"}
-                      onChange={() => setUploadMethod("url")}
-                    />
-                    <span>Provide URL</span>
-                  </label>
+                  {/* If the resource is a video, force URL mode and disable file upload */}
+                  {resourceType === "video" ? (
+                    <>
+                      <label className="flex gap-2 items-center" title="Disabled for videos">
+                        <input type="radio" value="file" disabled />
+                        <span className="text-gray-400" >
+                          Upload File 
+                        </span>
+                      </label>
+                      <label className="flex gap-2 items-center">
+                        <input
+                          type="radio"
+                          value="url"
+                          checked={uploadMethod === "url"}
+                          onChange={() => setUploadMethod("url")}
+                        />
+                        <span>Provide URL</span>
+                      </label>
+                    </>
+                  ) : (
+                    <>
+                      <label className="flex gap-2 items-center">
+                        <input
+                          type="radio"
+                          value="file"
+                          checked={uploadMethod === "file"}
+                          onChange={() => setUploadMethod("file")}
+                        />
+                        <span>Upload File</span>
+                      </label>
+                      <label className="flex gap-2 items-center">
+                        <input
+                          type="radio"
+                          value="url"
+                          checked={uploadMethod === "url"}
+                          onChange={() => setUploadMethod("url")}
+                        />
+                        <span>Provide URL</span>
+                      </label>
+                    </>
+                  )}
                 </div>
               </div>
 
@@ -182,7 +207,8 @@ export default function UploadResourceForm({ resourceType = "doc" }) {
                     <FormLabel>Course</FormLabel>
                     <Select
                       onValueChange={field.onChange}
-                      defaultValue={field.value}>
+                      defaultValue={field.value}
+                    >
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select course" />
@@ -210,7 +236,10 @@ export default function UploadResourceForm({ resourceType = "doc" }) {
                     <FormItem>
                       <FormLabel>Resource URL</FormLabel>
                       <FormControl>
-                        <Input {...field} placeholder="https://example.com/resource" />
+                        <Input
+                          {...field}
+                          placeholder="https://example.com/resource"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -240,7 +269,8 @@ export default function UploadResourceForm({ resourceType = "doc" }) {
                 <Button
                   type="button"
                   variant="ghost"
-                  onClick={() => navigate(-1)}>
+                  onClick={() => navigate(-1)}
+                >
                   Cancel
                 </Button>
               </div>
@@ -258,10 +288,20 @@ export default function UploadResourceForm({ resourceType = "doc" }) {
 
           {/* URL Preview - only show when URL method is selected */}
           {uploadMethod === "url" && (
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+            <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center flex justify-center items-center bg-white">
               <div className="text-gray-500">
-                <svg className="mx-auto h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                <svg
+                  className="mx-auto h-12 w-12"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                  />
                 </svg>
                 <p className="mt-2 text-sm text-gray-600">
                   You can provide a URL to an external resource
