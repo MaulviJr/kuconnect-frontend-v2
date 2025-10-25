@@ -50,6 +50,12 @@ const data = {
       url: "/gpa-calculator",
       icon: IconCalculator,
     },
+    {
+      title: "Admin Panel",
+      url: "/admin",
+      icon: IconCalculator,
+      hideIfRole: (user) => !user?.role?.includes("admin"),
+    },
   ],
   navClouds: [
     {
@@ -138,7 +144,8 @@ export function AppSidebar({ ...props }) {
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5">
+              className="data-[slot=sidebar-menu-button]:!p-1.5"
+            >
               <a href="/dashboard">
                 <img
                   src="/src/assets/favicon.svg"

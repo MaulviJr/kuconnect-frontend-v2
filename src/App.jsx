@@ -10,6 +10,7 @@ import Onboarding from "./pages/auth/onboarding";
 import NotesPage from "./pages/main/notes/all-notes";
 import CourseDetails from "./pages/main/course-details";
 import ProtectedRoute from "./components/protected-route";
+import AdminRoute from "./components/admin-route";
 import QuizzesPage from "./pages/main/quizzes/all-quizzes";
 import CourseView from "./pages/gpa-calculator/course-view";
 import SemesterView from "./pages/gpa-calculator/semester-view";
@@ -19,6 +20,7 @@ import VideoLecturesPage from "./pages/main/video-lectures/all-videos";
 import UploadNotes from "./pages/main/notes/upload-notes";
 import UploadVideos from "./pages/main/video-lectures/upload-videos";
 import UploadPastPapers from "./pages/main/past-papers/upload-past-papers";
+import AdminPanel from "./pages/admin";
 
 function App() {
   const rehydrateAuth = useStore((state) => state.rehydrateAuth);
@@ -44,6 +46,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/dashboard"
           element={
@@ -121,7 +124,15 @@ function App() {
           element={
             <ProtectedRoute>
               <AskSeniorsPage />
-             </ProtectedRoute>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <AdminPanel />
+            </AdminRoute>
           }
         />
         <Route

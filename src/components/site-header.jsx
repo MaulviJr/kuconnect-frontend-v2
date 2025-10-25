@@ -8,6 +8,7 @@ const pageTitles = {
   "/gpa-calculator": "GPA Calculator",
   "/gpa-calculator/:semesterIndex": "GPA Calculator - Semester",
   "/ask-seniors": "Ask Seniors",
+  "/admin": "Admin Panel",
 };
 
 export function SiteHeader() {

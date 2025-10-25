@@ -19,3 +19,8 @@ export const verifyAuth = async () => {
   const res = await api.get("/auth/verify");
   return res.data;
 };
+
+export const updateRole = async (email, newRole) => {
+  const res = await api.post("/auth/change-role", { email, newRole });
+  return res.data;
+};
