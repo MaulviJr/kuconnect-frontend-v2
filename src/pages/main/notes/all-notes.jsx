@@ -89,7 +89,7 @@ export default function NotesPage() {
 
           <div className="flex gap-4 w-full md:w-auto">
             {/* Type Filter */}
-            <Select>
+            {/* <Select>
               <SelectTrigger className="w-[160px]">
                 <SelectValue placeholder="Type" />
               </SelectTrigger>
@@ -98,7 +98,7 @@ export default function NotesPage() {
                 <SelectItem value="pastpapers">Past Papers</SelectItem>
                 <SelectItem value="assignments">Assignments</SelectItem>
               </SelectContent>
-            </Select>
+            </Select> */}
 
             {/* Sort Filter */}
             <Select>
@@ -136,9 +136,9 @@ export default function NotesPage() {
                 className={"flex items-center justify-end text-sm"}>
                 
                 <div className="flex gap-2 flex-wrap">
-                  <Button variant="outline" size="sm" onClick={() => window.open(note.url, "_blank")}>                  
+                  {/* <Button variant="outline" size="sm" onClick={() => window.open(note.url, "_blank")}>                  
                     Preview
-                  </Button>
+                  </Button> */}
                   <Button
                     size="sm"
                     className="bg-green-600 hover:bg-green-700"

@@ -4,13 +4,12 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import ReactMarkdown from "react-markdown";
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X } from "lucide-react";
+import { BotMessageSquare, MessageCircle, X } from "lucide-react";
 
 function ChatBot({ isOpen, onToggle }) {
   const chatContainerRef = useRef(null);
 
   const baseURL = import.meta.env.VITE_API_BASE_URL;
-
 
   // Dummy messages
   const [messages, setMessages] = useState([]);
@@ -62,7 +61,7 @@ function ChatBot({ isOpen, onToggle }) {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials:'include',
+        credentials: "include",
         body: JSON.stringify({
           userQuestion,
         }),
@@ -78,18 +77,18 @@ function ChatBot({ isOpen, onToggle }) {
           senderId: { username: "Me" },
         };
         setMessages((prevMessages) => [...prevMessages, llmMsg]);
-      }else{
-        throw new Error (data.message)
+      } else {
+        throw new Error(data.message);
       }
     } catch (error) {
-    console.log("heyheyhey")
-        const llmMsg = {
-            message: `Failed to get response\nIssue:${error.message}`,
-            isSent: false,
-            createdAt: new Date().toISOString(),
-            senderId: { username: "Me" },
-          };
-          setMessages((prevMessages) => [...prevMessages, llmMsg]);
+      console.log("heyheyhey");
+      const llmMsg = {
+        message: `Failed to get response\nIssue:${error.message}`,
+        isSent: false,
+        createdAt: new Date().toISOString(),
+        senderId: { username: "Me" },
+      };
+      setMessages((prevMessages) => [...prevMessages, llmMsg]);
 
       if (error.name === "AbortError") {
         console.log("Fetch aborted");
@@ -125,7 +124,7 @@ function ChatBot({ isOpen, onToggle }) {
         {!isOpen && (
           <motion.button
             key="minimized"
-            initial={{ scale: 0.3, opacity: 0, }}
+            initial={{ scale: 0.3, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
@@ -140,15 +139,15 @@ function ChatBot({ isOpen, onToggle }) {
       {/* Expanded State - Full Chatbot */}
       <AnimatePresence mode="wait">
         {isOpen && (
-         <motion.div
-         key="expanded"
-         initial={{ scale: 0, opacity: 0 }}
-         animate={{ scale: 1, opacity: 1 }}
-         exit={{ scale: 0, opacity: 0 }}
-         transition={{ duration: 0.3, ease: "easeInOut" }}
-         style={{ transformOrigin: "bottom right" }} // 👈 this is the magic
-         className="chats-container max-w-full w-screen sm:w-96 aspect-[10/16] rounded-md overflow-hidden flex flex-col shadow-2xl bg-gray-100 fixed bottom-0 sm:bottom-6 right-0 sm:right-6 z-50 h-screen sm:h-auto"
-       >
+          <motion.div
+            key="expanded"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            style={{ transformOrigin: "bottom right" }} // 👈 this is the magic
+            className="chats-container max-w-full w-screen sm:w-96 aspect-[10/16] rounded-md overflow-hidden flex flex-col shadow-2xl bg-gray-100 fixed bottom-0 sm:bottom-6 right-0 sm:right-6 z-50 h-screen sm:h-auto"
+          >
             <div
               className="px-4 py-2 bg-green-500"
               style={{
@@ -164,8 +163,8 @@ function ChatBot({ isOpen, onToggle }) {
                 <p className="font-poppins font-semibold text-2xl">KU Bot</p>
               </div>
               <div className="navigation-por" style={{ marginLeft: "auto" }}>
-                <button 
-                  onClick={onToggle} 
+                <button
+                  onClick={onToggle}
                   className="hover:bg-green-600 rounded p-1 transition-colors"
                 >
                   <X className="text-white" size={20} />
@@ -177,35 +176,54 @@ function ChatBot({ isOpen, onToggle }) {
               className="flex flex-col flex-1 mb-2 gap-y-6 pt-4 pb-2 px-2.5 overflow-auto bg-gray-100"
               ref={chatContainerRef}
             >
-              {messages?.map((value, index) => (
-                <p
-                  key={index}
-                  className={`inline-block rounded-lg mx-1.5 max-w-3/4 px-4 py-2.5 leading-5 font-light text-gray-800 text-[15px] text-start font-jost ${
-                    value.isSent ? "self-end bg-green-300" : "self-start bg-gray-200"
-                  }`}
-                >
-                  <ReactMarkdown
-                    components={{
-                      ul: ({ node, ...props }) => (
-                        <ul className="list-disc ml-6" {...props} />
-                      ),
-                      ol: ({ node, ...props }) => (
-                        <ol className="list-decimal ml-6" {...props} />
-                      ),
-                      li: ({ node, ...props }) => <li className="mb-1" {...props} />,
-                    }}
-                  >
-                    {value.message}
-                  </ReactMarkdown>
-
+              {messages.length === 0 ? (
+                <div className="flex flex-col justify-center items-center text-center m-auto py-16 text-gray-700">
+                  <div className="flex flex-col items-center">
+                    <BotMessageSquare className="text-green-600 w-12 h-12 mb-4" />
+                    <h1 className="text-2xl font-semibold text-primary font-poppins">
+                      Welcome to KU Bot
+                    </h1>
+                    <p className="text-[15px] font-normal font-jost max-w-md mt-1">
+                      Your smart guide for all KU-related information.
+                    </p>                    
+                  </div>
+                </div>
+              ) : (
+                messages?.map((value, index) => (
                   <p
-                    className="text-start"
-                    style={{ fontSize: "10px", margin: 0 }}
+                    key={index}
+                    className={`inline-block rounded-lg mx-1.5 max-w-3/4 px-4 py-2.5 leading-5 font-light text-gray-800 text-[15px] text-start font-jost ${
+                      value.isSent
+                        ? "self-end bg-green-300"
+                        : "self-start bg-gray-200"
+                    }`}
                   >
-                    {getMessageTime(value.createdAt)}
+                    <ReactMarkdown
+                      components={{
+                        ul: ({ node, ...props }) => (
+                          <ul className="list-disc ml-6" {...props} />
+                        ),
+                        ol: ({ node, ...props }) => (
+                          <ol className="list-decimal ml-6" {...props} />
+                        ),
+                        li: ({ node, ...props }) => (
+                          <li className="mb-1" {...props} />
+                        ),
+                      }}
+                    >
+                      {value.message}
+                    </ReactMarkdown>
+
+                    <p
+                      className="text-start"
+                      style={{ fontSize: "10px", margin: 0 }}
+                    >
+                      {getMessageTime(value.createdAt)}
+                    </p>
                   </p>
-                </p>
-              ))}
+                ))
+              )}
+
               {isFetchingResponse && (
                 <p
                   className={
