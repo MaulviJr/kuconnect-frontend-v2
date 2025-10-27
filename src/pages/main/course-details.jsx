@@ -54,7 +54,7 @@ export default function CourseDetails() {
                 <span className="ml-4 text-xl font-semibold font-poppins text-primary text-left">
                   {opt.label}
                 </span>
-              {!opt.launched&&<span className=" bg-primary text-white p-1.5 rounded-lg text-sm absolute right-2.5 top-2.5 leading-3 font-jost">coming soon</span>}
+              {!opt.launched&&<span className=" bg-primary text-white p-1.5 rounded-lg text-sm absolute right-2.5 top-2.5 leading-3 font-jost ">coming soon</span>}
               </CardContent>
             </Card>
           ))}

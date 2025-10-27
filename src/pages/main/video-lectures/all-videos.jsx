@@ -124,9 +124,9 @@ export default function VideoLecturesPage() {
               key={video.id}
               className="flex flex-col  gap-2 border-2 p-2  max-w-90 border-primary "
             >
-              <CardContent className=" flex w-full p-0 m-0">
-                <div className="w-full flex justify-center items-center bg-secondary  aspect-video rounded-md relative">
-                  < FaCirclePlay className='w-8 h-8 text-primary'/> 
+              <CardContent className=" flex w-full p-0 m-0  ">
+                <div className="w-full flex justify-center border-2 border-gray-300 items-center bg-secondary  aspect-video rounded-md relative">
+                  < FaCirclePlay className='w-11 h-11 text-primary'/> 
 
                 </div>
               </CardContent>
