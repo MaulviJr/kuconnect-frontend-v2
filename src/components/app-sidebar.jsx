@@ -148,7 +148,7 @@ export function AppSidebar({ ...props }) {
             >
               <a href="/dashboard">
                 <img
-                  src="/src/assets/favicon.svg"
+                  src="/assets/favicon.svg"
                   alt="logo"
                   className="!size-5"
                 />
