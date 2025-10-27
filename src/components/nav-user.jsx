@@ -26,6 +26,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getInitials } from "@/utils/avatar-helper";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {UserCircle2Icon} from 'lucide-react'
 
 export function NavUser() {
   const navigate = useNavigate();
@@ -61,13 +62,14 @@ export function NavUser() {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
               <Avatar className="h-8 w-8 rounded-lg grayscale">
-                <AvatarImage src={user.avatar} alt={user.fullName} />
-                <AvatarFallback className="rounded-lg">
+                <UserCircle2Icon className="h-8" />
+                
+                {/* <AvatarFallback className="rounded-lg">
                   {getInitials(user.fullName)}
-                </AvatarFallback>
+                </AvatarFallback> */}
               </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{user.fullName}</span>
+              <div className="grid flex-1 font-jost  text-left text-sm leading-tight">
+                <span className="truncate font-medium">{user.name}</span>
                 <span className="text-muted-foreground truncate text-xs">
                   {user.email}
                 </span>
